@@ -4,7 +4,6 @@
   "version": "0.0.2",
   "tnp": {
     "type": "isomorphic-lib",
-    "isCommandLineToolOnly": true,
     "overrided": {
       "includeAsDev": [
         "morphi",
