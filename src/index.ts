@@ -45,6 +45,7 @@ export class Helpers {
 
 
 export const CLASS = {
+  NAME:CLASSNAME.CLASSNAME,
   getBy: Helpers.getBy,
   getConfig: Helpers.getConfig,
   getFromObject: Helpers.getFromObject,

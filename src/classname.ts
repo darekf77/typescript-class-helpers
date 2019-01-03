@@ -41,10 +41,18 @@ export namespace CLASSNAME {
         target.prototype[SYMBOL.CLASSNAMEKEY] = className
       }
 
-      CLASSNAME.prototype.classes.push({
-        className,
-        target
-      })
+      const existed = (CLASSNAME.prototype.classes as { className: string; target: Function; }[])
+        .find(f => f.className === className)
+
+      if (existed) {
+        existed.target = target;
+      } else {
+        CLASSNAME.prototype.classes.push({
+          className,
+          target
+        })
+      }
+
     } as any;
   }
 
