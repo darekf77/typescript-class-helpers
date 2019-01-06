@@ -83,7 +83,7 @@ export namespace CLASSNAME {
   export function getClassBy(className: string | Function): Function {
     let res;
     if (Array.isArray(className)) {
-      if (className.length) {
+      if (className.length !== 1) {
         throw `Mapping error... please use proper class names:
   {
     propertyObject: 'MyClassName',
