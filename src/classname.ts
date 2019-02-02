@@ -8,6 +8,10 @@ export namespace CLASSNAME {
   CLASSNAME.prototype.classes = [];
 
   export function getClassConfig(target: Function, configs: Models.ClassConfig[] = []): Models.ClassConfig[] {
+    if (!_.isFunction(target)) {
+      throw `[typescript-class-helper][getClassConfig]
+Cannot get class config from: ${target}`
+    }
     const meta = SYMBOL.CLASS_META_CONFIG + target.name;
     // if (!target.prototype[meta]) target.prototype[meta] = {};
     let c: Models.ClassConfig;
