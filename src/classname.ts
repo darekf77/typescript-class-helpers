@@ -1,6 +1,7 @@
 import * as _ from 'lodash';
 import { Models } from './models';
 import { SYMBOL } from './symbols';
+import { Helpers } from 'ng2-logger';
 
 
 export namespace CLASSNAME {
@@ -15,12 +16,12 @@ Cannot get class config from: ${target}`
     const meta = SYMBOL.CLASS_META_CONFIG + target.name;
     // if (!target.prototype[meta]) target.prototype[meta] = {};
     let c: Models.ClassConfig;
-    if (target.prototype[meta]) {
-      c = target.prototype[meta];
+    if (target[meta]) {
+      c = target[meta];
     } else {
       c = new Models.ClassConfig();
       c.classReference = target;
-      target.prototype[meta] = c;
+      target[meta] = c;
     }
     configs.push(c);
     const proto = Object.getPrototypeOf(target)

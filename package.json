@@ -1,8 +1,6 @@
 {
-  "name": "typescript-class-helpers",
-  "description": "Usefull helper to have in your typescript project",
-  "version": "0.0.5",
   "tnp": {
+    "resources": [],
     "type": "isomorphic-lib",
     "overrided": {
       "includeAsDev": [
@@ -25,6 +23,9 @@
       ]
     }
   },
+  "name": "typescript-class-helpers",
+  "description": "Usefull helper to have in your typescript project",
+  "version": "0.0.5",
   "scripts": {
     "test": "mocha --require ts-node/register src/**/*.spec.ts",
     "test:watch": "mocha --compilers ts-node/register src/**/*.spec.ts --watch"
@@ -42,5 +43,10 @@
   "bugs": {
     "url": "https://github.com/darekf77/typescript-class-helpers/issues"
   },
-  "homepage": "https://github.com/darekf77/typescript-class-helpers#readme"
+  "homepage": "https://github.com/darekf77/typescript-class-helpers#readme",
+  "husky": {
+    "hooks": {
+      "pre-push": "tnp deps:show:if:standalone"
+    }
+  }
 }
