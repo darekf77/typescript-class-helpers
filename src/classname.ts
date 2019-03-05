@@ -1,8 +1,7 @@
 import * as _ from 'lodash';
 import { Models } from './models';
 import { SYMBOL } from './symbols';
-import { Helpers } from 'ng2-logger';
-
+import { Helpers } from './index';
 
 export namespace CLASSNAME {
 
@@ -38,7 +37,7 @@ Cannot get class config from: ${target}`
    * Decorator requred for production mode
    * @param name Name of class
    */
-  export function CLASSNAME(className: string) {
+  export function CLASSNAME(className: string, uniqueKey = 'id') {
 
     return function (target: Function) {
       // console.log(`CLASSNAME Inited ${className}`)
@@ -54,7 +53,8 @@ Cannot get class config from: ${target}`
       } else {
         CLASSNAME.prototype.classes.push({
           className,
-          target
+          target,
+          uniqueKey
         })
       }
 
@@ -83,6 +83,26 @@ Cannot get class config from: ${target}`
               `
     }
     return target.name;
+  }
+
+  export function getObjectIndexPropertyValue(obj: any) {
+    const className = Helpers.getNameFromObject(obj);
+    // console.log('className',className)
+    let c = CLASSNAME.prototype.classes.find(c => c.className === className);
+    // console.log('c',c)
+    if (c) {
+      return c.uniqueKey;
+    }
+  }
+
+  export function getObjectIndexValue(obj: any) {
+    const className = Helpers.getNameFromObject(obj);
+    // console.log('className',className)
+    let c = CLASSNAME.prototype.classes.find(c => c.className === className);
+    // console.log('c',c)
+    if (c && _.isString(c.uniqueKey)) {
+      return obj[c.uniqueKey];
+    }
   }
 
   export function getClassBy(className: string | Function): Function {

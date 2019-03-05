@@ -31,8 +31,13 @@ class User {
   authors: User[];
   friend: User;
   test: Test;
-  constructor() {
-    this.id = User.id++;
+  constructor(id?: number) {
+    if (_.isNumber(id)) {
+      this.id = id;
+    } else {
+      this.id = User.id++;
+    }
+
   }
 }
 
@@ -60,6 +65,17 @@ describe('CLASS', () => {
     expect(d).to.be.instanceOf(c)
     expect(d1).to.be.instanceOf(c)
 
+  });
+
+  it('Comparaion should work', () => {
+
+
+    let u1 = new User(111)
+    let u2 = new User(222)
+    let u3as1 = new User(111)
+
+    expect(CLASS.OBJECT(u1).isEqual(u2)).to.be.false;
+    expect(CLASS.OBJECT(u1).isEqual(u3as1)).to.be.true;
   });
 
 

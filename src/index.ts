@@ -45,12 +45,67 @@ export class Helpers {
 
 
 export const CLASS = {
-  NAME:CLASSNAME.CLASSNAME,
+  NAME: CLASSNAME.CLASSNAME,
   getBy: Helpers.getBy,
   getConfig: Helpers.getConfig,
   getFromObject: Helpers.getFromObject,
   getName: Helpers.getName,
   getNameFromObject: Helpers.getNameFromObject,
-  describeProperites: Helpers.describeProperites
+  describeProperites: Helpers.describeProperites,
+  OBJECT: (obj: any) => {
+    return {
+      get indexValue() {
+        return CLASSNAME.getObjectIndexValue(obj);
+      },
+      get indexProperty() {
+        return CLASSNAME.getObjectIndexPropertyValue(obj);
+      },
+      get isClassObject() {
+        if (_.isNumber(obj)) {
+          return false;
+        }
+        if (_.isString(obj)) {
+          return false;
+        }
+        if (_.isRegExp(obj)) {
+          return false;
+        }
+        if (_.isBoolean(obj)) {
+          return false;
+        }
+        if (_.isDate(obj)) {
+          return false;
+        }
+        if (_.isArray(obj)) {
+          return false;
+        }
+        if (!_.isObject(obj)) {
+          return false;
+        }
+        const className = CLASS.getNameFromObject(obj)
+        return _.isString(className) && className !== 'Object';
+      },
+      isEqual: (anotherObj: any, compareDeep = false) => {
+        if (obj === anotherObj) {
+          return true;
+        }
+        if (CLASS.getNameFromObject(obj) !== CLASS.getNameFromObject(anotherObj)) {
+          return false;
+        }
+        const v1 = CLASSNAME.getObjectIndexValue(obj);
+        const v2 = CLASSNAME.getObjectIndexValue(anotherObj);
+        // console.log(`v1: ${v1}`)
+        // console.log(`v2: ${v2}`)
+        if (_.isNumber(v1) && _.isNumber(v2)) {
+          // console.log(`v1: ${v1}, v2: ${v2} - class ${CLASS.getNameFromObject(obj)}`)
+          return (v1 === v2);
+        }
+        if (compareDeep) {
+          return _.isEqual(v1, v2)
+        }
+        return false;
+      }
+    }
+  }
 }
 
