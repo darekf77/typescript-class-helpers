@@ -83,22 +83,40 @@ export const CLASS = {
           return false;
         }
         const className = CLASS.getNameFromObject(obj)
-        return _.isString(className) && className !== 'Object';
+        return _.isString(className);
       },
       isEqual: (anotherObj: any, compareDeep = false) => {
-        if (obj === anotherObj) {
-          return true;
-        }
-        if (CLASS.getNameFromObject(obj) !== CLASS.getNameFromObject(anotherObj)) {
+        if(!CLASS.OBJECT(obj).isClassObject || !CLASS.OBJECT(anotherObj).isClassObject) {
           return false;
+        }
+        if (obj === anotherObj) {
+          // console.log(`EQ v1: , v2:  - class1 ${CLASS.getNameFromObject(obj)}, class2 ${CLASS.getNameFromObject(anotherObj)}`, obj, anotherObj)
+          return true;
         }
         const v1 = CLASSNAME.getObjectIndexValue(obj);
         const v2 = CLASSNAME.getObjectIndexValue(anotherObj);
-        // console.log(`v1: ${v1}`)
-        // console.log(`v2: ${v2}`)
-        if (_.isNumber(v1) && _.isNumber(v2)) {
-          // console.log(`v1: ${v1}, v2: ${v2} - class ${CLASS.getNameFromObject(obj)}`)
-          return (v1 === v2);
+        const f1 = CLASSNAME.getObjectClassFamily(obj)
+        const f2 = CLASSNAME.getObjectClassFamily(anotherObj)
+        const isFamilyDiff = (!_.isString(f1) || !_.isString(f2) || (f1 !== f2));
+        // console.log(`DIFF FAMILY ${isFamilyDiff} v1: ${CLASSNAME.getObjectClassFamily(obj)}, v2: ${CLASSNAME.getObjectClassFamily(anotherObj)} - class1 ${CLASS.getNameFromObject(obj)}, class2 ${CLASS.getNameFromObject(anotherObj)}`)
+        if (isFamilyDiff) {
+          // console.log(`DIFF v1: ${v1}, v2: ${v2} - class1 ${CLASS.getNameFromObject(obj)}, class2 ${CLASS.getNameFromObject(anotherObj)}`)
+          return false;
+        }
+        if (!CLASS.OBJECT(obj).isClassObject || !CLASS.OBJECT(anotherObj).isClassObject) {
+          // console.log(`NOT CLASS v1: ${v1}, v2: ${v2} - class1 ${CLASS.getNameFromObject(obj)}, class2 ${CLASS.getNameFromObject(anotherObj)}`)
+          return false
+        }
+
+        // console.log(`v1: ${v1} ,class ${CLASS.getNameFromObject(obj)} ,prop: ${CLASS.OBJECT(obj).indexProperty}`)
+        // console.log(`v2: ${v2} ,class ${CLASS.getNameFromObject(anotherObj)} ,prop: ${CLASS.OBJECT(anotherObj).indexProperty}`)
+        // console.log(`v1: ${v1}, v2: ${v2} - class1 ${CLASS.getNameFromObject(obj)}, class2 ${CLASS.getNameFromObject(anotherObj)}`)
+        // console.log('')
+        if ((_.isNumber(v1) && _.isNumber(v2)) || (_.isString(v1) && _.isString(v2))) {
+
+          const res = (v1 === v2);
+
+          return res;
         }
         if (compareDeep) {
           return _.isEqual(v1, v2)

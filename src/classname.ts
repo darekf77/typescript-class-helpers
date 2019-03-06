@@ -5,6 +5,7 @@ import { Helpers } from './index';
 
 export namespace CLASSNAME {
 
+
   CLASSNAME.prototype.classes = [];
 
   export function getClassConfig(target: Function, configs: Models.ClassConfig[] = []): Models.ClassConfig[] {
@@ -37,7 +38,7 @@ Cannot get class config from: ${target}`
    * Decorator requred for production mode
    * @param name Name of class
    */
-  export function CLASSNAME(className: string, uniqueKey = 'id') {
+  export function CLASSNAME(className: string, uniqueKey = 'id', classFamily?: string) {
 
     return function (target: Function) {
       // console.log(`CLASSNAME Inited ${className}`)
@@ -51,11 +52,33 @@ Cannot get class config from: ${target}`
       if (existed) {
         existed.target = target;
       } else {
-        CLASSNAME.prototype.classes.push({
+        const res = {
           className,
           target,
-          uniqueKey
-        })
+          uniqueKey,
+          classFamily
+        }
+
+        if (_.isUndefined(classFamily)) {
+          Object.defineProperty(res, 'classFamily', {
+            get: function () {
+              const parent = target['__proto__']
+              // console.log(`parent of ${className}: '${parent.name}'`)
+              // console.log(`parent typpeof`,typeof parent)
+              // console.log('parent is fun', _.isFunction(parent.name))
+              if (!_.isFunction(parent) || parent.name === 'Object' || parent.name === '') {
+                return className;
+              }
+              const classNameNew = getClassName(parent)
+              // console.log('classNameNew', classNameNew)
+              return getClassFamilyByClassName(classNameNew)
+            }
+          })
+        }
+
+        // console.log(`CLASSNAME: ${className}`, res)
+
+        CLASSNAME.prototype.classes.push(res)
       }
 
     } as any;
@@ -92,6 +115,24 @@ Cannot get class config from: ${target}`
     // console.log('c',c)
     if (c) {
       return c.uniqueKey;
+    }
+  }
+
+  export function getClassFamilyByClassName(className: string) {
+    let c = CLASSNAME.prototype.classes.find(c => c.className === className);
+    // console.log('CLASSNAME.prototype.classes', CLASSNAME.prototype.classes)
+    if (c) {
+      return c.classFamily;
+    }
+  }
+
+  export function getObjectClassFamily(obj: any) {
+    const className = Helpers.getNameFromObject(obj);
+    // console.log('className',className)
+    let c = CLASSNAME.prototype.classes.find(c => c.className === className);
+    // console.log('c',c)
+    if (c) {
+      return c.classFamily;
     }
   }
 
