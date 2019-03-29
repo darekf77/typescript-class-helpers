@@ -5,7 +5,9 @@ import { Helpers, CLASS } from '../index';
 import { CLASSNAME } from '../classname';
 
 
-@CLASS.NAME('Proj', 'location')
+@CLASS.NAME('Proj', {
+  uniqueKey: 'location'
+})
 export class Proj {
   isProjectInstance = true;
   location: string;
@@ -20,7 +22,10 @@ export class Proj2 extends Proj {
 
 }
 
-@CLASS.NAME('Proj3', 'idaaa', 'aaaa')
+@CLASS.NAME('Proj3', {
+  uniqueKey: 'idaaa',
+  classFamily: 'aaaa'
+})
 export class Proj3 extends Proj2 {
   isProjectInstance2 = true;
 
@@ -77,7 +82,7 @@ describe('CLASSNAME', () => {
       called = true;
     };
 
-    expect(CLASS.getName(Object,true)).to.be.eq('Object')
+    expect(CLASS.getName(Object, true)).to.be.eq('Object')
     console.error = prev;
     expect(called).to.be.true;
 

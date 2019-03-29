@@ -2,6 +2,7 @@ import * as _ from 'lodash';
 import { Models } from './models';
 import { SYMBOL } from './symbols';
 import { Helpers } from './index';
+import { Helpers as HelperLogger } from 'ng2-logger';
 
 export namespace CLASSNAME {
 
@@ -38,12 +39,31 @@ Cannot get class config from: ${target}`
    * Decorator requred for production mode
    * @param name Name of class
    */
-  export function CLASSNAME(className: string, uniqueKey = 'id', classFamily?: string) {
+  export function CLASSNAME(className: string,
+    options?: {
+      uniqueKey?: string;
+      classFamily?: string,
+      classNameInBrowser?: string;
+    }) {
+
+    let { classFamily, uniqueKey, classNameInBrowser } = options || {
+      classFamily: void 0,
+      uniqueKey: 'id',
+      classNameInBrowser: void 0
+    };
+
+    if (!uniqueKey) {
+      uniqueKey = 'id'
+    }
+
+    if (HelperLogger.isBrowser && _.isString(classNameInBrowser)) {
+      className = classNameInBrowser;
+    }
 
     return function (target: Function) {
       // console.log(`CLASSNAME Inited ${className}`)
       if (target.prototype) {
-        target.prototype[SYMBOL.CLASSNAMEKEY] = className
+        target.prototype[SYMBOL.CLASSNAMEKEY] = className;
       }
 
       const existed = (CLASSNAME.prototype.classes as { className: string; target: Function; }[])
@@ -54,6 +74,7 @@ Cannot get class config from: ${target}`
       } else {
         const res = {
           className,
+          classNameInBrowser,
           target,
           uniqueKey,
           classFamily
@@ -103,7 +124,7 @@ Cannot get class config from: ${target}`
               class ExampleClass {
                 ...
               }
-              `,target)
+              `, target)
     }
     return target.name;
   }
