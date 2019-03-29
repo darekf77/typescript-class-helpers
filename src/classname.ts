@@ -93,17 +93,17 @@ Cannot get class config from: ${target}`
       return target.prototype[SYMBOL.CLASSNAMEKEY];
     }
     if (production) {
-      throw `(PRODUCTION MODE ERROR)
+      console.error(`[tch][getClassName(...)](PRODUCTION MODE ERROR)
               Please use decoartor @CLASSNAME for each entity or controller
               This is preventing class name problem in minified code.
 
-              import { CLASSNAME } from 'morphi/browser';
+              import { CLASS } from 'typescript-class-helpers';
 
-              @CLASSNAME('ExampleClass')
+              @CLASS.NAME('ExampleClass')
               class ExampleClass {
                 ...
               }
-              `
+              `,target)
     }
     return target.name;
   }

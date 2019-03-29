@@ -26,6 +26,15 @@ export class Proj3 extends Proj2 {
 
 }
 
+
+export class P4 extends Proj3 {
+
+}
+
+export class P5 extends P4 {
+
+}
+
 // const instance = BrowserDB.instance;
 
 describe('CLASSNAME', () => {
@@ -44,6 +53,35 @@ describe('CLASSNAME', () => {
     expect(CLASS.OBJECT(new Proj3()).indexProperty).to.be.eq('idaaa')
 
   })
+
+  it('Name inheritance should works', async () => {
+
+    expect(CLASS.getName(P4)).to.be.eq('Proj3')
+    expect(CLASS.getName(P5)).to.be.eq('Proj3')
+
+    expect(CLASS.getName(P4, true)).to.be.eq('Proj3')
+    expect(CLASS.getName(P5, true)).to.be.eq('Proj3')
+
+
+
+  });
+
+
+  it('Should handle production mode getClassName', async () => {
+
+    expect(CLASS.getName(Object)).to.be.eq('Object')
+
+    var prev = console.error;
+    var called = false;
+    console.error = function (arg) {
+      called = true;
+    };
+
+    expect(CLASS.getName(Object,true)).to.be.eq('Object')
+    console.error = prev;
+    expect(called).to.be.true;
+
+  });
 
 });
 
