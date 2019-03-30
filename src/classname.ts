@@ -15,7 +15,7 @@ export namespace CLASSNAME {
 Cannot get class config from: ${target}`
     }
     const meta = SYMBOL.CLASS_META_CONFIG + target.name;
-    // if (!target.prototype[meta]) target.prototype[meta] = {};
+
     let c: Models.ClassConfig;
     if (target[meta]) {
       c = target[meta];
@@ -56,14 +56,17 @@ Cannot get class config from: ${target}`
       uniqueKey = 'id'
     }
 
-    if (HelperLogger.isBrowser && _.isString(classNameInBrowser)) {
-      className = classNameInBrowser;
-    }
+    // console.log(`classAnem: ${className}, isBrower: ${HelperLogger.isBrowser},
+    // classNameInBrowser: ${classNameInBrowser} `)
+    // if (HelperLogger.isBrowser && _.isString(classNameInBrowser)) {
+    //   className = classNameInBrowser;
+    // }
 
     return function (target: Function) {
       // console.log(`CLASSNAME Inited ${className}`)
-      if (target.prototype) {
-        target.prototype[SYMBOL.CLASSNAMEKEY] = className;
+      if (target) {
+        target[SYMBOL.CLASSNAMEKEY] = className;
+        target[SYMBOL.CLASSNAMEKEYBROWSER] = classNameInBrowser;
       }
 
       const existed = (CLASSNAME.prototype.classes as { className: string; target: Function; }[])
@@ -106,12 +109,22 @@ Cannot get class config from: ${target}`
   }
 
   export function getClassName(target: Function, production = false) {
-    if (!target || _.isString(target)) {
+    if (_.isString(target)) {
+      console.trace(target);
+      console.warn(`[tch][getClassName] target is string: '${target}', produciton: ${production}`)
       return target;
     }
+    if (!_.isFunction(target)) {
+      console.trace(target);
+      console.error(`[tch][getClassName] target is not a class`)
+      return void 0;
+    }
 
-    if (target.prototype && target.prototype[SYMBOL.CLASSNAMEKEY]) {
-      return target.prototype[SYMBOL.CLASSNAMEKEY];
+    if (HelperLogger.isBrowser && _.isString(target[SYMBOL.CLASSNAMEKEYBROWSER])) {
+      return target[SYMBOL.CLASSNAMEKEYBROWSER];
+    }
+    if (target[SYMBOL.CLASSNAMEKEY]) {
+      return target[SYMBOL.CLASSNAMEKEY];
     }
     if (production) {
       console.error(`[tch][getClassName(...)](PRODUCTION MODE ERROR)
