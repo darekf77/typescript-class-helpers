@@ -87,11 +87,22 @@ describe('CLASS', () => {
 
     let oo = {};
 
-    expect(CLASS.OBJECT(oo).isClassObject).to.be.true
+    expect(CLASS.OBJECT(oo).isClassObject).to.be.false
     expect(CLASS.OBJECT(oo).indexValue).to.be.undefined;
     expect(CLASS.OBJECT(oo).indexProperty).to.be.undefined;
 
   });
+
+  it('should handle readme exapmle',()=> {
+    @CLASS.NAME('Example')
+    class Example {
+
+    }
+
+    expect(CLASS.getName(Example) === 'Example').to.be.true;
+    expect(CLASS.getNameFromObject(new Example()) === 'Example').to.be.true;
+    expect(CLASS.getBy('Example') === Example).to.be.true;
+  })
 
 });
 

@@ -61,32 +61,19 @@ export const CLASS = {
         return CLASSNAME.getObjectIndexPropertyValue(obj);
       },
       get isClassObject() {
-        if (_.isNumber(obj)) {
-          return false;
-        }
-        if (_.isString(obj)) {
-          return false;
-        }
-        if (_.isRegExp(obj)) {
-          return false;
-        }
-        if (_.isBoolean(obj)) {
+
+        if (!_.isObject(obj) || _.isArray(obj) || _.isRegExp(obj) ||
+          _.isBuffer(obj) || _.isArrayBuffer(obj)) {
           return false;
         }
         if (_.isDate(obj)) {
-          return false;
-        }
-        if (_.isArray(obj)) {
-          return false;
-        }
-        if (!_.isObject(obj)) {
-          return false;
+          return true;
         }
         const className = CLASS.getNameFromObject(obj)
-        return _.isString(className);
+        return _.isString(className) && className !== 'Object';
       },
       isEqual: (anotherObj: any, compareDeep = false) => {
-        if(!CLASS.OBJECT(obj).isClassObject || !CLASS.OBJECT(anotherObj).isClassObject) {
+        if (!CLASS.OBJECT(obj).isClassObject || !CLASS.OBJECT(anotherObj).isClassObject) {
           return false;
         }
         if (obj === anotherObj) {

@@ -88,5 +88,18 @@ describe('CLASSNAME', () => {
 
   });
 
+  it('Should handle class object propertyly', async () => {
+
+    expect(CLASS.OBJECT({}).isClassObject).to.be.eq(false)
+    expect(CLASS.OBJECT(new P4()).isClassObject).to.be.eq(true)
+    expect(CLASS.OBJECT(new P5()).isClassObject).to.be.eq(true)
+    expect(CLASS.OBJECT(new Date()).isClassObject).to.be.eq(true)
+    expect(CLASS.OBJECT([]).isClassObject).to.be.eq(false)
+    expect(CLASS.OBJECT(true).isClassObject).to.be.eq(false)
+    expect(CLASS.OBJECT(100).isClassObject).to.be.eq(false)
+    expect(CLASS.OBJECT(/asd/g).isClassObject).to.be.eq(false)
+
+  });
+
 });
 
