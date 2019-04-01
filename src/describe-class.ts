@@ -33,9 +33,20 @@ export function describeByDefaultModelsAndMapping(target: Function): string[] {
         .filter(key => !_.isFunction(target[SYMBOL.DEFAULT_MODEL][key]))
         .forEach(key => res[key] = null);
     }
-    if (target[SYMBOL.MODELS_MAPPING]) {
-      Object.keys(target[SYMBOL.MODELS_MAPPING])
-        .forEach(key => res[key] = null);
+    let mapping = target[SYMBOL.MODELS_MAPPING];
+    if (_.isArray(mapping)) {
+      mapping.forEach(m => {
+        Object.keys(m)
+          .forEach(key => {
+            res[key] = null
+          });
+      })
+    } else if (mapping) {
+
+      Object.keys(mapping)
+        .forEach(key => {
+          res[key] = null
+        });
     }
   }
 
