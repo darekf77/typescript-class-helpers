@@ -3,6 +3,7 @@ import * as _ from 'lodash';
 import { CLASSNAME } from './classname';
 import { describeFromClassStringify, describeByDefaultModelsAndMapping } from './describe-class';
 import { Models } from './models';
+import { SYMBOL } from './symbols';
 export class Helpers {
 
   static getBy(className: string | Function) {
@@ -25,8 +26,8 @@ export class Helpers {
     return this.getName(this.getFromObject(o));
   }
 
-  static getConfig(target: Function, configs: Models.ClassConfig[] = []): Models.ClassConfig[] {
-    return CLASSNAME.getClassConfig(target, configs)
+  static getConfig(target: Function): Models.ClassConfig[] {
+    return CLASSNAME.getClassConfig(target)
   }
 
   static describeProperites(target: Function) {
@@ -47,6 +48,12 @@ export class Helpers {
 export const CLASS = {
   NAME: CLASSNAME.CLASSNAME,
   getBy: Helpers.getBy,
+  getSingleton<T=any>(target: Function) {
+      return target[SYMBOL.SINGLETON] as T;
+  },
+  setSingletonObj(target:Function, obj:any) {
+    target[SYMBOL.SINGLETON] = obj;
+  },
   getConfig: Helpers.getConfig,
   getFromObject: Helpers.getFromObject,
   getName: Helpers.getName,

@@ -25,9 +25,9 @@ Cannot get class config from: ${target}`
       target[meta] = c;
     }
     configs.push(c);
-    const proto = Object.getPrototypeOf(target)
-    if (proto.name && proto.name !== target.name) {
-      getClassConfig(proto, configs)
+    const baseClass = Object.getPrototypeOf(target)
+    if (baseClass.name && baseClass.name !== target.name) {
+      getClassConfig(baseClass, configs)
     }
     return configs;
   }
@@ -41,15 +41,19 @@ Cannot get class config from: ${target}`
    */
   export function CLASSNAME(className: string,
     options?: {
-      uniqueKey?: string;
+      uniqueKey?: string,
+      singleton?: boolean,
+      autoinstance?: boolean,
       classFamily?: string,
-      classNameInBrowser?: string;
+      classNameInBrowser?: string,
     }) {
 
-    let { classFamily, uniqueKey, classNameInBrowser } = options || {
+    let { classFamily, uniqueKey, classNameInBrowser, singleton, autoinstance } = options || {
       classFamily: void 0,
       uniqueKey: 'id',
-      classNameInBrowser: void 0
+      classNameInBrowser: void 0,
+      singleton: false,
+      autoinstance: false
     };
 
     if (!uniqueKey) {
@@ -104,7 +108,41 @@ Cannot get class config from: ${target}`
 
         CLASSNAME.prototype.classes.push(res)
       }
+      // console.log(`CLASS: ${target.name}, singleton: ${singleton}, autoinstance: ${autoinstance}`)
+      if (singleton) {
+        const Original = target;
 
+        // the new constructor behaviour
+        var obj = {
+          decoratedConstructor: function (...args) {
+            const context = Original.apply(this, args);
+
+            if (singleton && !obj.decoratedConstructor[SYMBOL.SINGLETON]) {
+              obj.decoratedConstructor[SYMBOL.SINGLETON] = this;
+            }
+            return context;
+          }
+        };
+
+        // copy prototype so intanceof operator still works
+        obj.decoratedConstructor.prototype = Original.prototype;
+
+        Object.keys(Original).forEach((name: string) => { obj.decoratedConstructor[name] = (<any>Original)[name]; });
+        Object.defineProperty(obj.decoratedConstructor, 'name', {
+          value: className,
+          configurable: true,
+        })
+        if(autoinstance) {
+          // console.log(`AUTOINSTANCE FOR ${target.name}`)
+          const auto = new (Original as any)();
+          obj.decoratedConstructor[SYMBOL.SINGLETON] = auto;
+          Original[SYMBOL.SINGLETON] = auto;
+        }
+
+        // (obj.decoratedConstructor as any).name = className;
+        // console.log('return new contruor', decoratedConstructor)
+        return obj.decoratedConstructor;
+      }
     } as any;
   }
 
