@@ -1,4 +1,4 @@
-# TYPESCRIPT CLASS HELERPS
+# TYPESCRIPT CLASS HELPERS
 
 Library contains all kinds of helpers for OOP in typescript.
 
