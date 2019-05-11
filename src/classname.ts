@@ -3,11 +3,16 @@ import { Models } from './models';
 import { SYMBOL } from './symbols';
 import { Helpers } from './index';
 import { Helpers as HelperLogger } from 'ng2-logger';
+import { getStorage } from './storage';
+
+
+
+function getClasses(): Models.ClassMeta[] {
+  const s = getStorage();
+  return s.classes as any;
+}
 
 export namespace CLASSNAME {
-
-
-  CLASSNAME.prototype.classes = [];
 
   export function getClassConfig(target: Function, configs: Models.ClassConfig[] = []): Models.ClassConfig[] {
     if (!_.isFunction(target)) {
@@ -48,7 +53,7 @@ Cannot get class config from: ${target}`
       classNameInBrowser?: string,
     }) {
 
-    let { classFamily, uniqueKey, classNameInBrowser, singleton, autoinstance } = options || {
+    let { classFamily, uniqueKey, classNameInBrowser, singleton = false, autoinstance } = options || {
       classFamily: void 0,
       uniqueKey: 'id',
       classNameInBrowser: void 0,
@@ -73,7 +78,7 @@ Cannot get class config from: ${target}`
         target[SYMBOL.CLASSNAMEKEYBROWSER] = classNameInBrowser;
       }
 
-      const existed = (CLASSNAME.prototype.classes as { className: string; target: Function; }[])
+      const existed = (getClasses() as { className: string; target: Function; }[])
         .find(f => f.className === className)
 
       if (existed) {
@@ -106,7 +111,7 @@ Cannot get class config from: ${target}`
 
         // console.log(`CLASSNAME: ${className}`, res)
 
-        CLASSNAME.prototype.classes.push(res)
+        getClasses().push(res)
       }
       // console.log(`CLASS: ${target.name}, singleton: ${singleton}, autoinstance: ${autoinstance}`)
       if (singleton) {
@@ -115,10 +120,15 @@ Cannot get class config from: ${target}`
         // the new constructor behaviour
         var obj = {
           decoratedConstructor: function (...args) {
+            // console.log(`DECORATED CONSTRUCTOR OF ${Original.name}`)
             const context = Original.apply(this, args);
+            const singletons = getStorage(SYMBOL.SINGLETONS);
+            const singletonInstance = singletons[className]; // CLASS.getSingleton(obj.decoratedConstructor)
 
-            if (singleton && !obj.decoratedConstructor[SYMBOL.SINGLETON]) {
-              obj.decoratedConstructor[SYMBOL.SINGLETON] = this;
+            if (singleton && !singletonInstance) {
+              // console.log('Singleton is set !')
+              singletons[className] = this;
+              // CLASS.setSingletonObj(obj.decoratedConstructor, this)
             }
             return context;
           }
@@ -132,11 +142,11 @@ Cannot get class config from: ${target}`
           value: className,
           configurable: true,
         })
-        if(autoinstance) {
+        if (autoinstance) {
           // console.log(`AUTOINSTANCE FOR ${target.name}`)
           const auto = new (Original as any)();
-          obj.decoratedConstructor[SYMBOL.SINGLETON] = auto;
-          Original[SYMBOL.SINGLETON] = auto;
+          const singletons = getStorage(SYMBOL.SINGLETONS);
+          singletons[className] = auto;
         }
 
         // (obj.decoratedConstructor as any).name = className;
@@ -183,7 +193,7 @@ Cannot get class config from: ${target}`
   export function getObjectIndexPropertyValue(obj: any) {
     const className = Helpers.getNameFromObject(obj);
     // console.log('className',className)
-    let c = CLASSNAME.prototype.classes.find(c => c.className === className);
+    let c = getClasses().find(c => c.className === className);
     // console.log('c',c)
     if (c) {
       return c.uniqueKey;
@@ -191,8 +201,8 @@ Cannot get class config from: ${target}`
   }
 
   export function getClassFamilyByClassName(className: string) {
-    let c = CLASSNAME.prototype.classes.find(c => c.className === className);
-    // console.log('CLASSNAME.prototype.classes', CLASSNAME.prototype.classes)
+    let c = getClasses().find(c => c.className === className);
+    // console.log('getClasses()', getClasses())
     if (c) {
       return c.classFamily;
     }
@@ -201,7 +211,7 @@ Cannot get class config from: ${target}`
   export function getObjectClassFamily(obj: any) {
     const className = Helpers.getNameFromObject(obj);
     // console.log('className',className)
-    let c = CLASSNAME.prototype.classes.find(c => c.className === className);
+    let c = getClasses().find(c => c.className === className);
     // console.log('c',c)
     if (c) {
       return c.classFamily;
@@ -211,7 +221,7 @@ Cannot get class config from: ${target}`
   export function getObjectIndexValue(obj: any) {
     const className = Helpers.getNameFromObject(obj);
     // console.log('className',className)
-    let c = CLASSNAME.prototype.classes.find(c => c.className === className);
+    let c = getClasses().find(c => c.className === className);
     // console.log('c',c)
     if (c && _.isString(c.uniqueKey)) {
       return obj[c.uniqueKey];
@@ -239,7 +249,7 @@ Cannot get class config from: ${target}`
       res = Date;
     }
 
-    let c = CLASSNAME.prototype.classes.find(c => c.className === className);
+    let c = getClasses().find(c => c.className === className);
 
     if (c) {
       res = c.target;

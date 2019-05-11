@@ -30,6 +30,13 @@ export namespace Models {
     parameters: { [paramName: string]: ParamConfig } = {};
   }
 
+  export interface ClassMeta {
+    uniqueKey?: string;
+    className?: string;
+    classFamily?: string;
+    classNameInBrowser?: string;
+    target?: Function;
+  }
 
   export class ClassConfig {
     browserTransformFn?: (entity: any) => any;

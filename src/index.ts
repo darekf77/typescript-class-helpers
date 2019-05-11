@@ -4,6 +4,7 @@ import { CLASSNAME } from './classname';
 import { describeFromClassStringify, describeByDefaultModelsAndMapping } from './describe-class';
 import { Models } from './models';
 import { SYMBOL } from './symbols';
+import { getStorage } from './storage';
 export class Helpers {
 
   static getBy(className: string | Function) {
@@ -48,11 +49,45 @@ export class Helpers {
 export const CLASS = {
   NAME: CLASSNAME.CLASSNAME,
   getBy: Helpers.getBy,
-  getSingleton<T=any>(target: Function) {
-      return target[SYMBOL.SINGLETON] as T;
+  getSingleton<T = any>(target: Function) {
+    if (typeof target !== 'function') {
+      console.error(`[tch][setSingletonObj] Type of target is not a function`)
+      return
+    }
+
+    const singletons = getStorage(SYMBOL.SINGLETONS);
+    const className = CLASS.getName(target);
+    if (!singletons[className]) {
+      console.error(`[tch] There is no singleton class for "${className}"`)
+      return
+    }
+    return singletons[className] as T;
   },
-  setSingletonObj(target:Function, obj:any) {
-    target[SYMBOL.SINGLETON] = obj;
+  setSingletonObj(target: Function, obj: any) {
+    // console.log('SET SINGLETON')
+    if (typeof target !== 'function') {
+      console.error(`[tch][setSingletonObj] Type of target is not a function`)
+      return
+    }
+
+    if (Array.isArray(obj)) {
+      console.error(`[tch][setSingletonObj] Singleton instance cant be an array`)
+      return
+    }
+
+    if (typeof obj !== 'object') {
+      console.error(`[tch][setSingletonObj] Singleton instance cant must be a object`)
+      return
+    }
+
+    const singletons = getStorage(SYMBOL.SINGLETONS);
+    const className = CLASS.getName(target);
+
+    if (singletons[className] && singletons[className] !== obj) {
+      console.warn(`[tch] You are trying to set singleton of "${className}" second time with different object.`)
+    }
+    // console.log(`SINGLETON SET for TARGET ${className}`)
+    singletons[className] = obj;
   },
   getConfig: Helpers.getConfig,
   getFromObject: Helpers.getFromObject,
