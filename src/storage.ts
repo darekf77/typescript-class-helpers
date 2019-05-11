@@ -3,6 +3,7 @@ import { SYMBOL } from './symbols';
 import * as _ from 'lodash'
 
 declare const window;
+declare const globalThis;
 
 function defaultValues() {
   return _.cloneDeep({
@@ -12,16 +13,23 @@ function defaultValues() {
 }
 
 export function getStorage<T = any>(property?: string): T {
+
+  // //#region @backend
+  // if (Helpers.isBrowser) {
+  //   debugger
+  // }
+  // //#endregion
+
   if (typeof property === 'string') {
 
     const storageInClassStaticProp = getStorage();
     return storageInClassStaticProp[property]
   }
 
-  if (typeof getStorage[SYMBOL.STORAGE] === 'undefined') {
-    getStorage[SYMBOL.STORAGE] = defaultValues()
+  if (typeof globalThis[SYMBOL.STORAGE] === 'undefined') {
+    globalThis[SYMBOL.STORAGE] = defaultValues()
   }
-  return getStorage[SYMBOL.STORAGE]
+  return globalThis[SYMBOL.STORAGE]
 
 }
 
