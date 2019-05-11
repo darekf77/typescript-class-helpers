@@ -9,7 +9,7 @@ import { getStorage } from './storage';
 
 function getClasses(): Models.ClassMeta[] {
   const s = getStorage();
-  return s.classes as any;
+  return s[SYMBOL.CLASSES] as any;
 }
 
 export namespace CLASSNAME {
