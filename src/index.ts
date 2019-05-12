@@ -51,14 +51,14 @@ export const CLASS = {
   getBy: Helpers.getBy,
   getSingleton<T = any>(target: Function) {
     if (typeof target !== 'function') {
-      console.error(`[tch][setSingletonObj] Type of target is not a function`)
+      console.error(`[typescript-class-helpers][setSingletonObj] Type of target is not a function`)
       return
     }
 
     const singletons = getStorage(SYMBOL.SINGLETONS);
     const className = CLASS.getName(target);
     if (!singletons[className]) {
-      console.error(`[tch] There is no singleton class for "${className}"`)
+      console.error(`[typescript-class-helpers] There is no singleton class for "${className}"`)
       return
     }
     return singletons[className] as T;
@@ -66,17 +66,17 @@ export const CLASS = {
   setSingletonObj(target: Function, obj: any) {
     // console.log('SET SINGLETON')
     if (typeof target !== 'function') {
-      console.error(`[tch][setSingletonObj] Type of target is not a function`)
+      console.error(`[typescript-class-helpers][setSingletonObj] Type of target is not a function`)
       return
     }
 
     if (Array.isArray(obj)) {
-      console.error(`[tch][setSingletonObj] Singleton instance cant be an array`)
+      console.error(`[typescript-class-helpers][setSingletonObj] Singleton instance cant be an array`)
       return
     }
 
     if (typeof obj !== 'object') {
-      console.error(`[tch][setSingletonObj] Singleton instance cant must be a object`)
+      console.error(`[typescript-class-helpers][setSingletonObj] Singleton instance cant must be a object`)
       return
     }
 
@@ -84,7 +84,7 @@ export const CLASS = {
     const className = CLASS.getName(target);
 
     if (singletons[className] && singletons[className] !== obj) {
-      console.warn(`[tch] You are trying to set singleton of "${className}" second time with different object.`)
+      console.warn(`[typescript-class-helpers] You are trying to set singleton of "${className}" second time with different object.`)
     }
     // console.log(`SINGLETON SET for TARGET ${className}`)
     singletons[className] = obj;

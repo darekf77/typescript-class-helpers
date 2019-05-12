@@ -153,12 +153,12 @@ Cannot get class config from: ${target}`
   export function getClassName(target: Function, production = false) {
     if (_.isString(target)) {
       console.trace(target);
-      console.warn(`[tch][getClassName] target is string: '${target}', produciton: ${production}`)
+      console.warn(`[typescript-class-helpers][getClassName] target is string: '${target}', produciton: ${production}`)
       return target;
     }
     if (!_.isFunction(target)) {
       console.trace(target);
-      console.error(`[tch][getClassName] target is not a class`)
+      console.error(`[typescript-class-helpers][getClassName] target is not a class`)
       return void 0;
     }
 
@@ -169,7 +169,7 @@ Cannot get class config from: ${target}`
       return target[SYMBOL.CLASSNAMEKEY];
     }
     if (production) {
-      console.error(`[tch][getClassName(...)](PRODUCTION MODE ERROR)
+      console.error(`[typescript-class-helpers][getClassName(...)](PRODUCTION MODE ERROR)
               Please use decoartor @CLASSNAME for each entity or controller
               This is preventing class name problem in minified code.
 
