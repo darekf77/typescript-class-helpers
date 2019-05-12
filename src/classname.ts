@@ -5,8 +5,6 @@ import { Helpers } from './index';
 import { Helpers as HelperLogger } from 'ng2-logger';
 import { getStorage } from './storage';
 
-
-
 function getClasses(): Models.ClassMeta[] {
   const s = getStorage();
   return s[SYMBOL.CLASSES] as any;
@@ -65,12 +63,6 @@ Cannot get class config from: ${target}`
       uniqueKey = 'id'
     }
 
-    // console.log(`classAnem: ${className}, isBrower: ${HelperLogger.isBrowser},
-    // classNameInBrowser: ${classNameInBrowser} `)
-    // if (HelperLogger.isBrowser && _.isString(classNameInBrowser)) {
-    //   className = classNameInBrowser;
-    // }
-
     return function (target: Function) {
       // console.log(`CLASSNAME Inited ${className}`)
       if (target) {
@@ -128,6 +120,7 @@ Cannot get class config from: ${target}`
             if (singleton && !singletonInstance) {
               // console.log('Singleton is set !')
               singletons[className] = this;
+              HelperLogger.isBrowser && console.log(`Singleton cleated for "${className}"`, singleton)
               // CLASS.setSingletonObj(obj.decoratedConstructor, this)
             }
             return context;
@@ -147,6 +140,7 @@ Cannot get class config from: ${target}`
           const auto = new (Original as any)();
           const singletons = getStorage(SYMBOL.SINGLETONS);
           singletons[className] = auto;
+          // HelperLogger.isBrowser && console.log(`Singleton cleated for "${className}"`, singleton)
         }
 
         // (obj.decoratedConstructor as any).name = className;
