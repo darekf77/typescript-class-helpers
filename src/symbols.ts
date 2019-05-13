@@ -4,7 +4,7 @@ export const SYMBOL = {
   CLASSNAMEKEY: Symbol(),
   // SINGLETON: Symbol(),
   CLASSNAMEKEYBROWSER: Symbol(),
-  CLASS_META_CONFIG: '$$rest_config',
+  CLASS_META_CONFIG: Symbol(),
   STORAGE: 'classesstorage',
   SINGLETONS: 'singletons',
   CLASSES: 'classes',

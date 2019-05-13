@@ -12,27 +12,32 @@ function getClasses(): Models.ClassMeta[] {
 
 export namespace CLASSNAME {
 
-  export function getClassConfig(target: Function, configs: Models.ClassConfig[] = []): Models.ClassConfig[] {
+  export function
+    getClassConfig(target: Function, configs: Models.ClassConfig[] = []): Models.ClassConfig[] {
     if (!_.isFunction(target)) {
-      throw `[typescript-class-helper][getClassConfig]
-Cannot get class config from: ${target}`
+      throw `[typescript-class-helper][getClassConfig] Cannot get class config from: ${target}`
     }
-    const meta = SYMBOL.CLASS_META_CONFIG + target.name;
 
-    let c: Models.ClassConfig;
-    if (target[meta]) {
-      c = target[meta];
+    const meta = SYMBOL.CLASS_META_CONFIG;
+    let config: Models.ClassConfig;
+
+    if (!target[meta]) {
+      config = new Models.ClassConfig();
+      config.classReference = target;
     } else {
-      c = new Models.ClassConfig();
-      c.classReference = target;
-      target[meta] = c;
+      config = target[meta];
+      var parentClass = Object.getPrototypeOf(target)
+      if (config.classReference === parentClass) {
+        const childConfig = new Models.ClassConfig();
+        childConfig.vParent = config;
+        childConfig.classReference = target;
+        config.vChildren.push(childConfig)
+        config = childConfig;
+      }
     }
-    configs.push(c);
-    const baseClass = Object.getPrototypeOf(target)
-    if (baseClass.name && baseClass.name !== target.name) {
-      getClassConfig(baseClass, configs)
-    }
-    return configs;
+    target[meta] = config;
+    configs.push(config);
+    return (_.isFunction(parentClass) && parentClass.name !== '') ? getClassConfig(parentClass, configs) : configs;
   }
 
 
@@ -87,7 +92,7 @@ Cannot get class config from: ${target}`
         if (_.isUndefined(classFamily)) {
           Object.defineProperty(res, 'classFamily', {
             get: function () {
-              const parent = target['__proto__']
+              const parent = Object.getPrototypeOf(target);
               // console.log(`parent of ${className}: '${parent.name}'`)
               // console.log(`parent typpeof`,typeof parent)
               // console.log('parent is fun', _.isFunction(parent.name))

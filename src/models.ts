@@ -44,7 +44,8 @@ export namespace Models {
     injections: { getter: Function, propertyName: string; }[] = [];
     calculatedPath: string;
     path: string;
-
+    vChildren?: ClassConfig[] = [];
+    vParent?: ClassConfig;
     classReference: Function;
     methods: { [methodName: string]: MethodConfig } = {};
   }
