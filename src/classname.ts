@@ -1,7 +1,7 @@
 import * as _ from 'lodash';
 import { Models } from './models';
 import { SYMBOL } from './symbols';
-import { Helpers } from './index';
+import { Helpers, CLASS } from './index';
 import { Helpers as HelperLogger } from 'ng2-logger';
 import { getStorage } from './storage';
 
@@ -42,27 +42,26 @@ export namespace CLASSNAME {
 
 
 
+
   /**
    * PLEASE PROVIDE NAME AS TYPED STRING, NOT VARIABLE
    * Decorator requred for production mode
    * @param name Name of class
    */
   export function CLASSNAME(className: string,
-    options?: {
-      uniqueKey?: string,
-      singleton?: boolean,
-      autoinstance?: boolean,
-      classFamily?: string,
-      classNameInBrowser?: string,
-    }) {
+    options?: Models.CLASSNAMEOptions) {
 
-    let { classFamily, uniqueKey, classNameInBrowser, singleton = false, autoinstance } = options || {
+    let { classFamily, uniqueKey, classNameInBrowser, singleton } = options || {
       classFamily: void 0,
       uniqueKey: 'id',
       classNameInBrowser: void 0,
-      singleton: false,
+      singleton: void 0,
       autoinstance: false
-    };
+    } as Models.CLASSNAMEOptions;
+
+    if (!_.isUndefined(singleton) && _.isBoolean(singleton) && singleton) {
+      singleton = 'first-instance'
+    }
 
     if (!uniqueKey) {
       uniqueKey = 'id'
@@ -93,65 +92,60 @@ export namespace CLASSNAME {
           Object.defineProperty(res, 'classFamily', {
             get: function () {
               const parent = Object.getPrototypeOf(target);
-              // console.log(`parent of ${className}: '${parent.name}'`)
-              // console.log(`parent typpeof`,typeof parent)
-              // console.log('parent is fun', _.isFunction(parent.name))
               if (!_.isFunction(parent) || parent.name === 'Object' || parent.name === '') {
                 return className;
               }
               const classNameNew = getClassName(parent)
-              // console.log('classNameNew', classNameNew)
               return getClassFamilyByClassName(classNameNew)
             }
           })
         }
-
-        // console.log(`CLASSNAME: ${className}`, res)
-
         getClasses().push(res)
       }
-      // console.log(`CLASS: ${target.name}, singleton: ${singleton}, autoinstance: ${autoinstance}`)
-      if (singleton) {
-        const Original = target;
+      const Original = target;
 
-        // the new constructor behaviour
-        var obj = {
+
+      if (singleton === 'first-instance' || singleton === 'last-instance') {
+        const obj = {
           decoratedConstructor: function (...args) {
             // console.log(`DECORATED CONSTRUCTOR OF ${Original.name}`)
             const context = Original.apply(this, args);
-            const singletons = getStorage(SYMBOL.SINGLETONS);
-            const singletonInstance = singletons[className]; // CLASS.getSingleton(obj.decoratedConstructor)
 
-            if (singleton && !singletonInstance) {
-              // console.log('Singleton is set !')
-              singletons[className] = this;
-              HelperLogger.isBrowser && console.log(`Singleton cleated for "${className}"`, singleton)
-              // CLASS.setSingletonObj(obj.decoratedConstructor, this)
+            const existedSingleton = CLASS.getSingleton(Original)
+            if (!existedSingleton || singleton === 'last-instance') {
+              CLASS.setSingletonObj(Original, this)
+              CLASS.setSingletonObj(obj.decoratedConstructor, this)
+              // console.log(`Singleton created for "${className}", mode: ${singleton} `);
             }
+            else {
+              // console.log('ingleton exists')
+            }
+
             return context;
           }
         };
 
         // copy prototype so intanceof operator still works
         obj.decoratedConstructor.prototype = Original.prototype;
-
         Object.keys(Original).forEach((name: string) => { obj.decoratedConstructor[name] = (<any>Original)[name]; });
         Object.defineProperty(obj.decoratedConstructor, 'name', {
           value: className,
           configurable: true,
         })
-        if (autoinstance) {
-          // console.log(`AUTOINSTANCE FOR ${target.name}`)
-          const auto = new (Original as any)();
-          const singletons = getStorage(SYMBOL.SINGLETONS);
-          singletons[className] = auto;
-          // HelperLogger.isBrowser && console.log(`Singleton cleated for "${className}"`, singleton)
-        }
-
         // (obj.decoratedConstructor as any).name = className;
         // console.log('return new contruor', decoratedConstructor)
         return obj.decoratedConstructor;
+      } else if (singleton === 'autoinstance') {
+
+        // console.log(`AUTOINSTANCE FOR ${target.name}`)
+        const auto = new (Original as any)();
+        CLASS.setSingletonObj(Original, auto)
+        // console.log(`Singleton created for "${className}", mode: ${singleton} `)
+
       }
+
+
+
     } as any;
   }
 

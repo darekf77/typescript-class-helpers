@@ -6,7 +6,7 @@ import { Helpers, CLASS } from '../index';
 
 
 
-@CLASS.NAME('SingletonTest', { singleton: true })
+@CLASS.NAME('SingletonTest', { singleton: 'first-instance' })
 class SingletonTest {
   testest = 'testest'
   constructor(private id: number) {
@@ -15,8 +15,17 @@ class SingletonTest {
 
 }
 
+@CLASS.NAME('SingletonTestLast', { singleton: 'last-instance' })
+class SingletonTestLast {
+  testest = 'testest'
+  constructor(private id: number) {
+    this.testest += id;
+  }
 
-@CLASS.NAME('SingletonTest2', { singleton: false })
+}
+
+
+@CLASS.NAME('SingletonTest2', {})
 class SingletonTest2 {
 
   testest = 'testest'
@@ -35,7 +44,7 @@ class SingletonTest3 {
 class EntityTest {
 
 }
-@CLASS.NAME('SingletonTest4', { singleton: true })
+@CLASS.NAME('SingletonTest4', { singleton: 'first-instance' })
 class SingletonTest4 {
 
   testest = 'testest'
@@ -52,17 +61,17 @@ class SingParent {
 
 }
 
-@CLASS.NAME('SingChild', { singleton: true })
+@CLASS.NAME('SingChild', { singleton: 'first-instance' })
 class SingChild extends SingParent {
 
 }
 
-@CLASS.NAME('Autoinstance', { singleton: true, autoinstance: true })
+@CLASS.NAME('Autoinstance', { singleton: 'autoinstance' })
 class Autoinstance extends SingParent {
 
 }
 
-@CLASS.NAME('AutoinstanceNot', { singleton: true })
+@CLASS.NAME('AutoinstanceNot', { singleton: 'first-instance' })
 class AutoinstanceNot extends SingParent {
 
 }
@@ -89,13 +98,24 @@ function updateChain(entity: Function, target: Function) {
 
 describe('Singleton', () => {
 
-  it('should create singleton ', () => {
+  it('should create singleton first instance', () => {
 
     let i = new SingletonTest(1);
     new SingletonTest(2);
     new SingletonTest(3);
     // console.log('SINGLETON',SingletonTest[SYMBOL.SINGLETON])
     expect(CLASS.getSingleton(SingletonTest)).to.be.eq(i)
+
+
+  })
+
+  it('should create singleton last instance', () => {
+
+    let i1 = new SingletonTestLast(1);
+    let i2 =  new SingletonTestLast(2);
+    let i3 = new SingletonTestLast(3);
+    // console.log('SINGLETON',SingletonTest[SYMBOL.SINGLETON])
+    expect(CLASS.getSingleton(SingletonTestLast)).to.be.eq(i3)
 
 
   })

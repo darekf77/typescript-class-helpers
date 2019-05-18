@@ -4,8 +4,7 @@ import * as _ from 'lodash'
 
 function defaultValues() {
   return _.cloneDeep({
-    [SYMBOL.CLASSES]: [],
-    [SYMBOL.SINGLETONS]: {}
+    [SYMBOL.CLASSES]: []
   })
 }
 

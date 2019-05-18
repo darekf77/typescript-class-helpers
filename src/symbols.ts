@@ -6,6 +6,5 @@ export const SYMBOL = {
   CLASSNAMEKEYBROWSER: Symbol(),
   CLASS_META_CONFIG: Symbol(),
   STORAGE: 'classesstorage',
-  SINGLETONS: 'singletons',
   CLASSES: 'classes',
 }

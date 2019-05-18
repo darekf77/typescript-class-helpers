@@ -41,8 +41,6 @@ export class Helpers {
       .filter(d => typeof target.prototype[d] !== 'function')
   }
 
-
-
 }
 
 
@@ -54,40 +52,39 @@ export const CLASS = {
       console.error(`[typescript-class-helpers][setSingletonObj] Type of target is not a function`)
       return
     }
+    const config = Helpers.getConfig(target)[0]
+    // console.log(`getSingleton for ${target.name}: `, config.singleton)
 
-    const singletons = getStorage(SYMBOL.SINGLETONS);
-    const className = CLASS.getName(target);
-    if (!singletons[className]) {
-      console.error(`[typescript-class-helpers] There is no singleton class for "${className}"`)
-      return
-    }
-    return singletons[className] as T;
+    return config.singleton as T;
   },
-  setSingletonObj(target: Function, obj: any) {
-    // console.log('SET SINGLETON')
+  setSingletonObj(target: Function, singletonObject: any) {
+    // console.log('SET SINGLETON', singletonObject)
     if (typeof target !== 'function') {
       console.error(`[typescript-class-helpers][setSingletonObj] Type of target is not a function`)
       return
     }
 
-    if (Array.isArray(obj)) {
+    if (Array.isArray(singletonObject)) {
       console.error(`[typescript-class-helpers][setSingletonObj] Singleton instance cant be an array`)
       return
     }
 
-    if (typeof obj !== 'object') {
+    if (typeof singletonObject !== 'object') {
       console.error(`[typescript-class-helpers][setSingletonObj] Singleton instance cant must be a object`)
       return
     }
 
-    const singletons = getStorage(SYMBOL.SINGLETONS);
     const className = CLASS.getName(target);
 
-    if (singletons[className] && singletons[className] !== obj) {
+
+    // console.log(`SINGLETON SET for TARGET ${className}`)
+    const config = Helpers.getConfig(target)[0]
+
+    if (config.singleton) {
       console.warn(`[typescript-class-helpers] You are trying to set singleton of "${className}" second time with different object.`)
     }
-    // console.log(`SINGLETON SET for TARGET ${className}`)
-    singletons[className] = obj;
+
+    config.singleton = singletonObject;
   },
   getConfig: Helpers.getConfig,
   getFromObject: Helpers.getFromObject,
