@@ -96,7 +96,22 @@ function updateChain(entity: Function, target: Function) {
 }
 
 
+class SingletonNoClassName {
+
+}
+
+
+
 describe('Singleton', () => {
+
+  it('should create singleton for class without @CLAS.NAME decorators', () => {
+
+    let i = new SingletonNoClassName();
+    CLASS.setSingletonObj(SingletonNoClassName, i)
+    expect(CLASS.getSingleton(SingletonNoClassName)).to.be.eq(i)
+
+
+  })
 
   it('should create singleton first instance', () => {
 
@@ -112,7 +127,7 @@ describe('Singleton', () => {
   it('should create singleton last instance', () => {
 
     let i1 = new SingletonTestLast(1);
-    let i2 =  new SingletonTestLast(2);
+    let i2 = new SingletonTestLast(2);
     let i3 = new SingletonTestLast(3);
     // console.log('SINGLETON',SingletonTest[SYMBOL.SINGLETON])
     expect(CLASS.getSingleton(SingletonTestLast)).to.be.eq(i3)
