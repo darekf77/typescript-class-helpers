@@ -20,7 +20,9 @@
         "lodash",
         "@types/lodash",
         "express"
-      ]
+      ],
+      "ignoreDepsPattern": [],
+      "dependencies": {}
     }
   },
   "name": "typescript-class-helpers",
