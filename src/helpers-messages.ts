@@ -3,6 +3,27 @@ import chalk from 'chalk';
 //#endregion
 import { Helpers} from 'ng2-logger';
 
+declare global {
+  namespace NodeJS {
+    interface Global {
+      tnp_normal_mode: boolean;
+      muteMessages: boolean;
+      testMode: boolean;
+      hideWarnings: boolean;
+      hideInfos: boolean;
+      hideLog: boolean;
+      tnpShowProgress?: boolean;
+      tnpNonInteractive?: boolean;
+      //#region @backend
+      tnpNoColorsMode?: boolean;
+      //#endregion
+
+    }
+  }
+}
+
+declare const PROGRESS_DATA;
+declare const config;
 
 export function error(details: any, noExit = false, noTrace = false) {
   if (Helpers.isBrowser) {
