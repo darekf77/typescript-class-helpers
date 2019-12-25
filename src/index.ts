@@ -5,6 +5,10 @@ import { describeFromClassStringify, describeByDefaultModelsAndMapping } from '.
 import { Models } from './models';
 import { SYMBOL } from './symbols';
 import { getStorage } from './storage';
+
+export { Models } from './models';
+export { SYMBOL } from './symbols';
+
 export class Helpers {
 
   static getBy(className: string | Function) {
