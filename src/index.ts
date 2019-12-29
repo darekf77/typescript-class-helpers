@@ -3,8 +3,7 @@ import * as _ from 'lodash';
 import { CLASSNAME } from './classname';
 import { describeFromClassStringify, describeByDefaultModelsAndMapping } from './describe-class';
 import { Models } from './models';
-import { SYMBOL } from './symbols';
-import { getStorage } from './storage';
+import { setClassName } from './set-class-name';
 
 export { Models } from './models';
 export { SYMBOL } from './symbols';
@@ -24,7 +23,7 @@ export class Helpers {
   }
 
   static getName(target: Function, production = false) {
-    return CLASSNAME.getClassName(target, production)
+    return CLASSNAME.getClassName(target, production) as string;
   }
 
   static getNameFromObject(o: Object) {
@@ -50,6 +49,7 @@ export class Helpers {
 
 export const CLASS = {
   NAME: CLASSNAME.CLASSNAME,
+  setName: setClassName,
   getBy: Helpers.getBy,
   getSingleton<T = any>(target: Function) {
     if (typeof target !== 'function') {

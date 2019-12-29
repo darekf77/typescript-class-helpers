@@ -39,11 +39,13 @@ Thumbs.db
 /index.js
 /index.d.ts
 /index.js.map
+/.vscode/tasks.json
 /.vscode/launch.json
 /tsconfig.browser.json
 /webpack.config.js
+/webpack.backend-bundle-build.js
 /run.js
 /tsconfig.json.filetemplate
 
-!*.filetemplate
+*.filetemplate
 
