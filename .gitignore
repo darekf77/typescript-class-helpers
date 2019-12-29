@@ -43,7 +43,6 @@ Thumbs.db
 /.vscode/launch.json
 /tsconfig.browser.json
 /webpack.config.js
-/webpack.backend-bundle-build.js
 /run.js
 /tsconfig.json.filetemplate
 
