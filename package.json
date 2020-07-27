@@ -13,7 +13,12 @@
       "ignoreDepsPattern": [],
       "dependencies": {}
     },
-    "linkedProjects": []
+    "linkedProjects": [],
+    "libReleaseOptions": {
+      "nodts": false,
+      "obscure": false,
+      "ugly": false
+    }
   },
   "name": "typescript-class-helpers",
   "description": "Usefull helper to have in your typescript project",
