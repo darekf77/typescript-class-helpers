@@ -11,7 +11,8 @@
         "express"
       ],
       "ignoreDepsPattern": [],
-      "dependencies": {}
+      "dependencies": {},
+      "linkedFolders": []
     },
     "linkedProjects": [],
     "libReleaseOptions": {
