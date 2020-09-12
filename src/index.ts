@@ -18,6 +18,9 @@ export class Helpers {
     if (_.isUndefined(o) || _.isNull(o)) {
       return;
     }
+    if (o.constructor) {
+      return o.constructor;
+    }
     const p = Object.getPrototypeOf(o)
     return p && p.constructor;
   }
@@ -27,7 +30,8 @@ export class Helpers {
   }
 
   static getNameFromObject(o: Object) {
-    return this.getName(this.getFromObject(o));
+    const fnCLass = this.getFromObject(o);
+    return this.getName(fnCLass);
   }
 
   static getConfig(target: Function): Models.ClassConfig[] {
