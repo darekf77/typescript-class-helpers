@@ -24,7 +24,7 @@
   },
   "name": "typescript-class-helpers",
   "description": "Usefull helper to have in your typescript project",
-  "version": "1.0.4",
+  "version": "1.0.5",
   "scripts": {
     "test": "mocha --require ts-node/register src/**/*.spec.ts",
     "test:watch": "mocha --compilers ts-node/register src/**/*.spec.ts --watch"
@@ -249,7 +249,7 @@
     "@types/lodash": "4.14.92",
     "express": "^4.16.3",
     "lodash": "^4.17.4",
-    "tnp-config": "0.0.3"
+    "tnp-config": "0.0.4"
   },
   "license": "MIT",
   "private": false
