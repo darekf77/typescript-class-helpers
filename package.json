@@ -34,7 +34,8 @@
       "ng2-rest",
       "docs",
       "documentation"
-    ]
+    ],
+    "lastBuildHash": "39a26fea5702617098b2e42199aacf189638a284"
   },
   "name": "typescript-class-helpers",
   "description": "Usefull helper to have in your typescript project",
@@ -273,7 +274,7 @@
     "tslint": "~6.1.0",
     "typeorm": "~0.2.7",
     "typescript": "~3.8.3",
-    "typescript-class-helpers": "~1.0.10",
+    "typescript-class-helpers": "~1.0.11",
     "typescript-formatter": "7.2.2",
     "uglifyjs-webpack-plugin": "2.2.0",
     "underscore": "^1.9.1",
