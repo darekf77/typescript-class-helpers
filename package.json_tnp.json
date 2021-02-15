@@ -19,5 +19,19 @@
     "nodts": false,
     "obscure": false,
     "ugly": false
-  }
+  },
+  "license": "MIT",
+  "private": false,
+  "scripts": {
+    "test": "mocha --require ts-node/register src/**/*.spec.ts",
+    "test:watch": "mocha --compilers ts-node/register src/**/*.spec.ts --watch"
+  },
+  "description": "Usefull helper to have in your typescript project",
+  "author": "Dariusz Filipiak",
+  "homepage": "https://github.com/darekf77/typescript-class-helpers#readme",
+  "keywords": [
+    "ng2-rest",
+    "docs",
+    "documentation"
+  ]
 }
