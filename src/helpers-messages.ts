@@ -1,5 +1,5 @@
 //#region @backend
-import chalk from 'chalk';
+import { CLI } from 'tnp-cli';
 //#endregion
 import { Helpers} from 'ng2-logger';
 
@@ -40,9 +40,9 @@ export function error(details: any, noExit = false, noTrace = false) {
       const json = JSON.stringify(details)
       if (global.tnp_normal_mode) {
         if (noTrace) {
-          !global.muteMessages && console.log(chalk.red(json));
+          !global.muteMessages && console.log(CLI.chalk.red(json));
         } else {
-          !global.muteMessages && console.trace(chalk.red(json));
+          !global.muteMessages && console.trace(CLI.chalk.red(json));
         }
       } else {
         console.log(json)
@@ -65,9 +65,9 @@ export function error(details: any, noExit = false, noTrace = false) {
   } else {
     if (global.tnp_normal_mode) {
       if (noTrace) {
-        !global.muteMessages && console.log(chalk.red(details));
+        !global.muteMessages && console.log(CLI.chalk.red(details));
       } else {
-        !global.muteMessages && console.trace(chalk.red(details));
+        !global.muteMessages && console.trace(CLI.chalk.red(details));
       }
     } else {
       console.log(details)
@@ -91,7 +91,7 @@ export function info(details: string) {
   }
   //#region @backend
   if (!global.muteMessages && !global.hideInfos) {
-    console.log(chalk.green(details))
+    console.log(CLI.chalk.green(details))
     global.tnpNonInteractive && PROGRESS_DATA.log({ msg: details })
   }
   //#endregion
@@ -106,7 +106,7 @@ export function log(details: string) {
   // console.log('global.muteMessages', global.muteMessages);
   // console.log('global.hideLog', global.hideLog);
   if ((!global.muteMessages && !global.hideLog)) {
-    console.log(chalk.gray(details))
+    console.log(CLI.chalk.gray(details))
     global.tnpNonInteractive && PROGRESS_DATA.log({ msg: details })
   }
   //#endregion
@@ -122,9 +122,9 @@ export function warn(details: string, trace = false) {
     trace = false;
   }
   if (trace) {
-    (!global.muteMessages && !global.hideWarnings) && console.trace(chalk.yellow(details))
+    (!global.muteMessages && !global.hideWarnings) && console.trace(CLI.chalk.yellow(details))
   } else {
-    (!global.muteMessages && !global.hideWarnings) && console.log(chalk.yellow(details))
+    (!global.muteMessages && !global.hideWarnings) && console.log(CLI.chalk.yellow(details))
   }
   //#endregion
 }

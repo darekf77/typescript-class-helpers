@@ -5,10 +5,8 @@
   "overrided": {
     "includeAsDev": "*",
     "includeOnly": [
-      "lodash",
-      "@types/lodash",
-      "express",
-      "tnp-config"
+      "ng2-logger",
+      "enum-values"
     ],
     "ignoreDepsPattern": [],
     "dependencies": {},

@@ -1,10 +1,7 @@
-import * as _ from 'lodash';
+import { _ } from 'tnp-core';
 import { describe, before } from 'mocha'
 import { expect } from 'chai';
 import { CLASS } from '../index';
-
-
-
 
 @CLASS.NAME('Project')
 class Project {

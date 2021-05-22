@@ -1,8 +1,8 @@
-import * as _ from 'lodash';
+import { _ } from 'tnp-core';
 import { Models } from './models';
 import { SYMBOL } from './symbols';
-import { Helpers, CLASS } from './index';
-import { Helpers as HelperLogger } from 'ng2-logger';
+import { Helpers } from './index';
+import { Helpers as ConfigHelpers } from 'tnp-config';
 import { getStorage } from './storage';
 import { setClassName } from './set-class-name';
 
@@ -53,7 +53,7 @@ export namespace CLASSNAME {
     options?: Models.CLASSNAMEOptions) {
     return function (target: Function) {
       // console.log(`CLASSNAME Inited ${className}`)
-      return setClassName(target, className,options);
+      return setClassName(target, className, options);
     } as any;
   }
 
@@ -69,7 +69,7 @@ export namespace CLASSNAME {
       return void 0;
     }
 
-    if (HelperLogger.isBrowser && _.isString(target[SYMBOL.CLASSNAMEKEYBROWSER])) {
+    if (ConfigHelpers.isBrowser && _.isString(target[SYMBOL.CLASSNAMEKEYBROWSER])) {
       return target[SYMBOL.CLASSNAMEKEYBROWSER];
     }
     if (target[SYMBOL.CLASSNAMEKEY]) {

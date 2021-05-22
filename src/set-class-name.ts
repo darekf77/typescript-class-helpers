@@ -1,5 +1,4 @@
-import * as _ from 'lodash';
-
+import { _ } from 'tnp-core';
 import { SYMBOL } from './symbols';
 import { Models } from './models';
 import { getStorage } from './storage';

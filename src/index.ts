@@ -1,5 +1,4 @@
-
-import * as _ from 'lodash';
+import { _ } from 'tnp-core';
 import { CLASSNAME } from './classname';
 import { describeFromClassStringify, describeByDefaultModelsAndMapping } from './describe-class';
 import { Models } from './models';
@@ -161,3 +160,4 @@ export const CLASS = {
   }
 }
 
+export * from 'enum-values';

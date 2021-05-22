@@ -1,6 +1,6 @@
-import { Helpers } from 'ng2-logger';
+import { Helpers } from 'tnp-config';
 import { SYMBOL } from './symbols';
-import * as _ from 'lodash'
+import { _ } from 'tnp-core';
 
 function defaultValues() {
   return _.cloneDeep({

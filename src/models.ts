@@ -1,12 +1,7 @@
-//#region @backend
-import { RequestHandler } from 'express';
-//#endregion
-
+import { ConfigModels } from 'tnp-config';
 
 export namespace Models {
 
-  export type HttpMethod = 'get' | 'post' | 'put' | 'delete' | 'patch' | 'head' | 'jsonp';
-  export type ParamType = 'Path' | 'Query' | 'Cookie' | 'Header' | 'Body';
 
   export type CLASSNAMEOptions = {
     uniqueKey?: string,
@@ -21,7 +16,7 @@ export namespace Models {
 
   export class ParamConfig {
     paramName: string;
-    paramType: ParamType;
+    paramType: ConfigModels.ParamType;
     index: number;
     defaultType: any;
     expireInSeconds?: number;
@@ -31,10 +26,10 @@ export namespace Models {
     methodName: string;
     path: string;
     descriptor: PropertyDescriptor;
-    type: HttpMethod;
+    type: ConfigModels.HttpMethod;
     realtimeUpdate: boolean;
     //#region @backend
-    requestHandler: RequestHandler;
+    requestHandler: any;
     //#endregion
     parameters: { [paramName: string]: ParamConfig } = {};
   }
