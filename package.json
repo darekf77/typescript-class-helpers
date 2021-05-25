@@ -277,7 +277,7 @@
     "tslint": "~6.1.0",
     "typeorm": "~0.2.7",
     "typescript": "~3.8.3",
-    "typescript-class-helpers": "~1.0.15",
+    "typescript-class-helpers": "~1.0.16",
     "typescript-formatter": "7.2.2",
     "uglifyjs-webpack-plugin": "2.2.0",
     "underscore": "^1.9.1",
@@ -295,5 +295,5 @@
   },
   "license": "MIT",
   "private": false,
-  "lastBuildTagHash": "262d774e2a1f4c2d5d775f533ae0f93ecc0724b3"
+  "lastBuildTagHash": "8ddf1fcc0173eb36b41ac2bc2ca42d44315cffca\n8ddf1fcc0173eb36b41ac2bc2ca42d44315cffca"
 }
