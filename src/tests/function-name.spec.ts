@@ -1,5 +1,5 @@
 import { Helpers, CLASS } from '../index';
-import { describe, before } from 'mocha'
+import { describe, before, it } from 'mocha'
 import { expect } from 'chai';
 
 describe('Set name for function or class', () => {

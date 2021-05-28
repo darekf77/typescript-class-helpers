@@ -1,7 +1,7 @@
 //#region @backend
 import { CLI } from 'tnp-cli';
 //#endregion
-import { Helpers} from 'ng2-logger';
+import { Helpers} from 'tnp-core';
 
 declare global {
   namespace NodeJS {

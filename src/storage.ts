@@ -1,4 +1,4 @@
-import { Helpers } from 'tnp-config';
+import { Helpers } from 'tnp-core';
 import { SYMBOL } from './symbols';
 import { _ } from 'tnp-core';
 

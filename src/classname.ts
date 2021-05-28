@@ -2,7 +2,7 @@ import { _ } from 'tnp-core';
 import { Models } from './models';
 import { SYMBOL } from './symbols';
 import { Helpers } from './index';
-import { Helpers as ConfigHelpers } from 'tnp-config';
+import { Helpers as ConfigHelpers } from 'tnp-core';
 import { getStorage } from './storage';
 import { setClassName } from './set-class-name';
 

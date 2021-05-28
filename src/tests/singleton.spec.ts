@@ -1,6 +1,6 @@
 
 import { _ } from 'tnp-core';
-import { describe, before } from 'mocha'
+import { describe, before, it } from 'mocha'
 import { expect } from 'chai';
 import { Helpers, CLASS } from '../index';
 
