@@ -279,7 +279,7 @@
     "zone.js": "0.10.2"
   },
   "dependencies": {
-    "enum-values": "~1.2.1",
+    "enum-values": "1.2.1",
     "ng2-logger": "~8.0.17"
   },
   "license": "MIT",
