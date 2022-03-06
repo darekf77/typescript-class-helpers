@@ -51,6 +51,7 @@
     "package.json_devDependencies.json": true,
     "package.json": true,
     "docs": true,
-    "logo.svg": true
+    "logo.svg": true,
+    "package.json_tnp.json": true
   }
 }
