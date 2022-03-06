@@ -18,6 +18,7 @@
   },
   "type": "isomorphic-lib",
   "version": "v3",
+   additionalNpmNames: ["firedev-class-helpers"],
   "license": "MIT",
   "private": false,
   "scripts": {
