@@ -11,7 +11,7 @@ function getClasses(): Models.ClassMeta[] {
   return s[SYMBOL.CLASSES] as any;
 }
 
-
+// @ts-ignore
 export function setClassName(target: Function, className: string, options?: Models.CLASSNAMEOptions) {
 
   let { classFamily, uniqueKey, classNameInBrowser, singleton } = options || {
@@ -31,7 +31,9 @@ export function setClassName(target: Function, className: string, options?: Mode
   }
 
   if (target) {
+    // @ts-ignore
     target[SYMBOL.CLASSNAMEKEY] = className;
+    // @ts-ignore
     target[SYMBOL.CLASSNAMEKEYBROWSER] = classNameInBrowser;
   }
 
@@ -68,6 +70,7 @@ export function setClassName(target: Function, className: string, options?: Mode
 
   if (singleton === 'first-instance' || singleton === 'last-instance') {
     const obj = {
+      // @ts-ignore
       decoratedConstructor: function (...args) {
         // console.log(`DECORATED CONSTRUCTOR OF ${Original.name}`)
         const context = Original.apply(this, args);
@@ -88,6 +91,7 @@ export function setClassName(target: Function, className: string, options?: Mode
 
     // copy prototype so intanceof operator still works
     obj.decoratedConstructor.prototype = Original.prototype;
+    // @ts-ignore
     Object.keys(Original).forEach((name: string) => { obj.decoratedConstructor[name] = (<any>Original)[name]; });
     Object.defineProperty(obj.decoratedConstructor, 'name', {
       value: className,

@@ -9,10 +9,12 @@ import { SYMBOL } from './symbols';
   */
 const FRegEx = new RegExp(/(?:this\.)(.+?(?= ))/g);
 export function describeFromClassStringify(target: Function, parent = false): string[] {
+  // @ts-ignore
   var result = [];
   if (parent) {
     var proto = Object.getPrototypeOf(target.prototype);
     if (proto) {
+      // @ts-ignore
       result = result.concat(describeFromClassStringify(proto.constructor, parent));
     }
   }
@@ -28,24 +30,35 @@ export function describeFromClassStringify(target: Function, parent = false): st
 export function describeByDefaultModelsAndMapping(target: Function): string[] {
   let res = {}
   if (target) {
+    // @ts-ignore
     if (target[SYMBOL.DEFAULT_MODEL]) {
+      // @ts-ignore
       Object.keys(target[SYMBOL.DEFAULT_MODEL])
-        .filter(key => !_.isFunction(target[SYMBOL.DEFAULT_MODEL][key]))
-        .forEach(key => res[key] = null);
+        .filter(key => {
+          // @ts-ignore
+          return !_.isFunction(target[SYMBOL.DEFAULT_MODEL][key]);
+        })
+        .forEach(key => {
+          // @ts-ignore
+          return res[key] = null;
+        });
     }
+    // @ts-ignore
     let mapping = target[SYMBOL.MODELS_MAPPING];
     if (_.isArray(mapping)) {
       mapping.forEach(m => {
         Object.keys(m)
           .forEach(key => {
-            res[key] = null
+            // @ts-ignore
+            res[key] = null;
           });
       })
     } else if (mapping) {
 
       Object.keys(mapping)
         .forEach(key => {
-          res[key] = null
+          // @ts-ignore
+          res[key] = null;
         });
     }
   }

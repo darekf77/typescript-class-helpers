@@ -44,6 +44,7 @@ export namespace Models {
 
   export class ClassConfig {
     browserTransformFn?: (entity: any) => any;
+    // @ts-ignore
     singleton: Object = void 0;
     injections: { getter: Function, propertyName: string; }[] = [];
     calculatedPath: string;

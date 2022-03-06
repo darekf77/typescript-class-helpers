@@ -22,20 +22,24 @@ export namespace CLASSNAME {
     const meta = SYMBOL.CLASS_META_CONFIG;
     let config: Models.ClassConfig;
 
+    // @ts-ignore
     if (!target[meta]) {
       config = new Models.ClassConfig();
       config.classReference = target;
     } else {
+      // @ts-ignore
       config = target[meta];
       var parentClass = Object.getPrototypeOf(target)
       if (config.classReference === parentClass) {
         const childConfig = new Models.ClassConfig();
         childConfig.vParent = config;
         childConfig.classReference = target;
+        // @ts-ignore
         config.vChildren.push(childConfig)
         config = childConfig;
       }
     }
+    // @ts-ignore
     target[meta] = config;
     configs.push(config);
     return (_.isFunction(parentClass) && parentClass.name !== '') ? getClassConfig(parentClass, configs) : configs;
@@ -69,10 +73,14 @@ export namespace CLASSNAME {
       return void 0;
     }
 
+    // @ts-ignore
     if (ConfigHelpers.isBrowser && _.isString(target[SYMBOL.CLASSNAMEKEYBROWSER])) {
+      // @ts-ignore
       return target[SYMBOL.CLASSNAMEKEYBROWSER];
     }
+    // @ts-ignore
     if (target[SYMBOL.CLASSNAMEKEY]) {
+      // @ts-ignore
       return target[SYMBOL.CLASSNAMEKEY];
     }
     if (production) {
@@ -91,6 +99,7 @@ export namespace CLASSNAME {
     return target.name;
   }
 
+  // @ts-ignore
   export function getObjectIndexPropertyValue(obj: any) {
     const className = Helpers.getNameFromObject(obj);
     // console.log('className',className)
@@ -101,6 +110,7 @@ export namespace CLASSNAME {
     }
   }
 
+  // @ts-ignore
   export function getClassFamilyByClassName(className: string) {
     let c = getClasses().find(c => c.className === className);
     // console.log('getClasses()', getClasses())
@@ -109,6 +119,7 @@ export namespace CLASSNAME {
     }
   }
 
+  // @ts-ignore
   export function getObjectClassFamily(obj: any) {
     const className = Helpers.getNameFromObject(obj);
     // console.log('className',className)
@@ -156,6 +167,7 @@ export namespace CLASSNAME {
       res = c.target;
     }
     // console.log(`getClassBy "${className} return \n\n ${res} \n\n`)
+    // @ts-ignore
     return res;
   }
 

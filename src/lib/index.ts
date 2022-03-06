@@ -41,6 +41,7 @@ export class Helpers {
     const d1 = describeFromClassStringify(target);
     const d2 = describeByDefaultModelsAndMapping(target);
     let uniq = {};
+    // @ts-ignore
     d1.concat(d2).forEach(p => uniq[p] = p);
     return Object.keys(uniq)
       .filter(d => !!d)
@@ -148,7 +149,7 @@ export const CLASS = {
         if ((_.isNumber(v1) && _.isNumber(v2)) || (_.isString(v1) && _.isString(v2))) {
 
           const res = (v1 === v2);
-
+          // @ts-ignore
           return res;
         }
         if (compareDeep) {
