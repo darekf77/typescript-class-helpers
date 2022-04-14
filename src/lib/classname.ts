@@ -13,8 +13,7 @@ function getClasses(): Models.ClassMeta[] {
 
 export namespace CLASSNAME {
 
-  export function
-    getClassConfig(target: Function, configs: Models.ClassConfig[] = []): Models.ClassConfig[] {
+  export function getClassConfig(target: Function, configs: Models.ClassConfig[] = []): Models.ClassConfig[] {
     if (!_.isFunction(target)) {
       throw `[typescript-class-helper][getClassConfig] Cannot get class config from: ${target}`
     }
@@ -44,9 +43,6 @@ export namespace CLASSNAME {
     configs.push(config);
     return (_.isFunction(parentClass) && parentClass.name !== '') ? getClassConfig(parentClass, configs) : configs;
   }
-
-
-
 
   /**
    * PLEASE PROVIDE NAME AS TYPED STRING, NOT VARIABLE
