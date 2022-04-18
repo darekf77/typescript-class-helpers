@@ -1,7 +1,7 @@
 {
   "name": "typescript-class-helpers",
   "description": "Usefull helper to have in your typescript project",
-  "version": "13.0.11",
+  "version": "13.0.12",
   "scripts": {
     "test": "mocha --require ts-node/register src/**/*.spec.ts",
     "test:watch": "mocha --compilers ts-node/register src/**/*.spec.ts --watch"
@@ -185,7 +185,7 @@
     "mkdirp": "0.5.1",
     "mocha": "5.2.0",
     "moment": "2.22.2",
-    "morphi": "~13.0.27",
+    "morphi": "~13.0.28",
     "ng-packagr": "13.0.0",
     "ng-talkback": "~13.0.9",
     "ng2-rest": "~13.0.13",
