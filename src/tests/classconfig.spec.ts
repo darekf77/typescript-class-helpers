@@ -29,11 +29,20 @@ describe('CLASS CONFIG', () => {
 
   it('Should create class config', async () => {
 
-    const parent = CLASS.getConfig(Parent)[0]
-    const child = CLASS.getConfig(Child)[0]
-    const child1 = CLASS.getConfig(Child1)[0]
-    const child2 = CLASS.getConfig(Child2)[0]
-    const child3 = CLASS.getConfig(Child3)[0]
+    const parentConfigs = CLASS.getConfigs(Parent);
+    const parent = parentConfigs[0]
+
+    const childConfigs = CLASS.getConfigs(Child);
+    const child = childConfigs[0]
+
+    const child1Configs = CLASS.getConfigs(Child1)
+    const child1 = child1Configs[0]
+
+    const child2Configs = CLASS.getConfigs(Child2)
+    const child2 = child2Configs[0]
+
+    const child3Configs = CLASS.getConfigs(Child3)
+    const child3 = child3Configs[0]
 
     // console.log(`parent: ${parent.classReference.name}`)
     expect(parent.classReference).to.be.eq(Parent)

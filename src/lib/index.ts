@@ -7,7 +7,7 @@ import { setClassName } from './set-class-name';
 export { Models } from './models';
 export { SYMBOL } from './symbols';
 
-export class Helpers {
+export class TchHelpers {
 
   static getBy(className: string | Function) {
     return CLASSNAME.getClassBy(className);
@@ -33,7 +33,7 @@ export class Helpers {
     return this.getName(fnCLass);
   }
 
-  static getConfig(target: Function): Models.ClassConfig[] {
+  static getConfigs(target: Function): Models.ClassConfig[] {
     return CLASSNAME.getClassConfig(target)
   }
 
@@ -54,13 +54,13 @@ export class Helpers {
 export const CLASS = {
   NAME: CLASSNAME.CLASSNAME,
   setName: setClassName,
-  getBy: Helpers.getBy,
+  getBy: TchHelpers.getBy,
   getSingleton<T = any>(target: Function) {
     if (typeof target !== 'function') {
       console.error(`[typescript-class-helpers][setSingletonObj] Type of target is not a function`)
       return
     }
-    const config = Helpers.getConfig(target)[0]
+    const config = TchHelpers.getConfigs(target)[0]
     // console.log(`getSingleton for ${target.name}: `, config.singleton)
 
     return config.singleton as T;
@@ -86,7 +86,7 @@ export const CLASS = {
 
 
     // console.log(`SINGLETON SET for TARGET ${className}`)
-    const config = Helpers.getConfig(target)[0]
+    const config = TchHelpers.getConfigs(target)[0]
 
     if (config.singleton) {
       console.warn(`[typescript-class-helpers] You are trying to set singleton of "${className}" second time with different object.`)
@@ -94,11 +94,14 @@ export const CLASS = {
 
     config.singleton = singletonObject;
   },
-  getConfig: Helpers.getConfig,
-  getFromObject: Helpers.getFromObject,
-  getName: Helpers.getName,
-  getNameFromObject: Helpers.getNameFromObject,
-  describeProperites: Helpers.describeProperites,
+  getConfigs: TchHelpers.getConfigs,
+  getConfig: (target: Function) => {
+    return _.first(TchHelpers.getConfigs(target));
+  },
+  getFromObject: TchHelpers.getFromObject,
+  getName: TchHelpers.getName,
+  getNameFromObject: TchHelpers.getNameFromObject,
+  describeProperites: TchHelpers.describeProperites,
   OBJECT: (obj: any) => {
     return {
       get indexValue() {

@@ -1,8 +1,7 @@
 import { _ } from 'tnp-core';
 import { describe, before, it } from 'mocha'
 import { expect } from 'chai';
-import { Helpers, CLASS } from '../index';
-import { CLASSNAME } from '../classname';
+import { TchHelpers, CLASS } from '../index';
 
 export class EXAMPLE_PAGINATION {
   id: number = undefined

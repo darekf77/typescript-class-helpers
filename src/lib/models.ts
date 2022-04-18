@@ -52,6 +52,8 @@ export namespace Models {
     vChildren?: ClassConfig[] = [];
     vParent?: ClassConfig;
     classReference: Function;
+    className?: string;
+    classNameInBrowser?: string;
     methods: { [methodName: string]: MethodConfig } = {};
   }
 

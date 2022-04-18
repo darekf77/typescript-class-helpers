@@ -1,8 +1,9 @@
 import { _ } from 'tnp-core';
 import { describe, before, it } from 'mocha'
 import { expect } from 'chai';
-import { Helpers, CLASS } from '../index';
-import { CLASSNAME } from '../classname';
+import { TchHelpers, CLASS } from '../index';
+import { CLASSNAME } from '../lib/classname';
+import { ERROR_MSG_CLASS_WITHOUT_DECORATOR } from '../lib/errors-messages';
 
 
 @CLASS.NAME('Proj', {
@@ -61,31 +62,18 @@ describe('CLASSNAME', () => {
 
   it('Name inheritance should works', async () => {
 
-    expect(CLASS.getName(P4)).to.be.eq('Proj3')
-    expect(CLASS.getName(P5)).to.be.eq('Proj3')
+    expect(CLASS.getName(P4)).to.be.eq('P4')
+    expect(CLASS.getName(P5)).to.be.eq('P5')
 
-    expect(CLASS.getName(P4, true)).to.be.eq('Proj3')
-    expect(CLASS.getName(P5, true)).to.be.eq('Proj3')
-
-
-
+    expect(() => CLASS.getName(P4, true)).to.throw(ERROR_MSG_CLASS_WITHOUT_DECORATOR);
+    expect(() => CLASS.getName(P5, true)).to.throw(ERROR_MSG_CLASS_WITHOUT_DECORATOR);
   });
 
 
   it('Should handle production mode getClassName', async () => {
 
-    expect(CLASS.getName(Object)).to.be.eq('Object')
-
-    var prev = console.error;
-    var called = false;
-    console.error = function (arg) {
-      called = true;
-    };
-
-    expect(CLASS.getName(Object, true)).to.be.eq('Object')
-    console.error = prev;
-    expect(called).to.be.true;
-
+    expect(CLASS.getName(Object)).to.be.eq('Object');
+    expect(() => CLASS.getName(Object, true)).to.throw(ERROR_MSG_CLASS_WITHOUT_DECORATOR);
   });
 
   it('Should handle class object propertyly', async () => {

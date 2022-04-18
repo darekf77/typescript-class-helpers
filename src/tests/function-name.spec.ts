@@ -1,4 +1,4 @@
-import { Helpers, CLASS } from '../index';
+import { CLASS } from '../index';
 import { describe, before, it } from 'mocha'
 import { expect } from 'chai';
 

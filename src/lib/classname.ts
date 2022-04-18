@@ -1,47 +1,48 @@
 import { _ } from 'tnp-core';
 import { Models } from './models';
 import { SYMBOL } from './symbols';
-import { Helpers } from './index';
+import { TchHelpers } from './index';
 import { Helpers as ConfigHelpers } from 'tnp-core';
 import { getStorage } from './storage';
 import { setClassName } from './set-class-name';
+import { registerd } from './registerd-db';
+import { ERROR_MSG_CLASS_WITHOUT_DECORATOR } from './errors-messages';
 
 function getClasses(): Models.ClassMeta[] {
   const s = getStorage();
   return s[SYMBOL.CLASSES] as any;
 }
-
 export namespace CLASSNAME {
 
-  export function getClassConfig(target: Function, configs: Models.ClassConfig[] = []): Models.ClassConfig[] {
+  export function getClassConfig(target: Function, configs: Models.ClassConfig[] = [], callerTarget?: Function): Models.ClassConfig[] {
     if (!_.isFunction(target)) {
       throw `[typescript-class-helper][getClassConfig] Cannot get class config from: ${target}`
     }
 
-    const meta = SYMBOL.CLASS_META_CONFIG;
     let config: Models.ClassConfig;
+    const parentClass = Object.getPrototypeOf(target);
+    const isValidParent = (_.isFunction(parentClass) && parentClass.name !== '');
 
-    // @ts-ignore
-    if (!target[meta]) {
+    if (registerd.classes.includes(target)) {
+      config = registerd.configs[registerd.classes.findIndex(c => c === target)];
+    } else {
       config = new Models.ClassConfig();
       config.classReference = target;
-    } else {
-      // @ts-ignore
-      config = target[meta];
-      var parentClass = Object.getPrototypeOf(target)
-      if (config.classReference === parentClass) {
-        const childConfig = new Models.ClassConfig();
-        childConfig.vParent = config;
-        childConfig.classReference = target;
-        // @ts-ignore
-        config.vChildren.push(childConfig)
-        config = childConfig;
-      }
+      registerd.classes.push(target);
     }
-    // @ts-ignore
-    target[meta] = config;
+
+    registerd.configs[registerd.classes.findIndex(c => c === target)] = config;
+    if (callerTarget) {
+      const callerTargetConfig = registerd.configs[registerd.classes.findIndex(c => c === callerTarget)];
+      if (!config.vChildren.includes(callerTargetConfig)) {
+        config.vChildren.push(callerTargetConfig);
+      }
+      callerTargetConfig.vParent = config;
+    }
+
     configs.push(config);
-    return (_.isFunction(parentClass) && parentClass.name !== '') ? getClassConfig(parentClass, configs) : configs;
+
+    return isValidParent ? getClassConfig(parentClass, configs, target) : configs;
   }
 
   /**
@@ -69,35 +70,33 @@ export namespace CLASSNAME {
       return void 0;
     }
 
-    // @ts-ignore
-    if (ConfigHelpers.isBrowser && _.isString(target[SYMBOL.CLASSNAMEKEYBROWSER])) {
-      // @ts-ignore
-      return target[SYMBOL.CLASSNAMEKEYBROWSER];
+    const configs = getClassConfig(target);
+    const config = _.first(configs);
+
+    const classNameInBrowser = config?.classNameInBrowser;
+
+    if (ConfigHelpers.isBrowser && _.isString(classNameInBrowser)) {
+      return classNameInBrowser;
     }
-    // @ts-ignore
-    if (target[SYMBOL.CLASSNAMEKEY]) {
-      // @ts-ignore
-      return target[SYMBOL.CLASSNAMEKEY];
+
+    const className = config?.className;
+
+    if (className) {
+      return className;
     }
+
     if (production) {
-      console.error(`[typescript-class-helpers][getClassName(...)](PRODUCTION MODE ERROR)
-              Please use decoartor @CLASSNAME for each entity or controller
-              This is preventing class name problem in minified code.
-
-              import { CLASS } from 'typescript-class-helpers';
-
-              @CLASS.NAME('ExampleClass')
-              class ExampleClass {
-                ...
-              }
-              `, target)
+      console.log('class without @CLASS.NAME deocrator',target as any)
+      throw new Error(ERROR_MSG_CLASS_WITHOUT_DECORATOR);
+    } else {
+      ConfigHelpers.log(`[typescript-class-helpers] Please use @CLASS.NAME('') decorator for class ${target?.name}`)
     }
     return target.name;
   }
 
   // @ts-ignore
   export function getObjectIndexPropertyValue(obj: any) {
-    const className = Helpers.getNameFromObject(obj);
+    const className = TchHelpers.getNameFromObject(obj);
     // console.log('className',className)
     let c = getClasses().find(c => c.className === className);
     // console.log('c',c)
@@ -117,7 +116,7 @@ export namespace CLASSNAME {
 
   // @ts-ignore
   export function getObjectClassFamily(obj: any) {
-    const className = Helpers.getNameFromObject(obj);
+    const className = TchHelpers.getNameFromObject(obj);
     // console.log('className',className)
     let c = getClasses().find(c => c.className === className);
     // console.log('c',c)
@@ -127,7 +126,7 @@ export namespace CLASSNAME {
   }
 
   export function getObjectIndexValue(obj: any) {
-    const className = Helpers.getNameFromObject(obj);
+    const className = TchHelpers.getNameFromObject(obj);
     // console.log('className',className)
     let c = getClasses().find(c => c.className === className);
     // console.log('c',c)
