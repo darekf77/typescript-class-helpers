@@ -86,10 +86,21 @@ export namespace CLASSNAME {
     }
 
     if (production) {
-      console.log('class without @CLASS.NAME deocrator',target as any)
+      console.log('class without @CLASS.NAME deocrator', target as any)
       throw new Error(ERROR_MSG_CLASS_WITHOUT_DECORATOR);
     } else {
-      ConfigHelpers.log(`[typescript-class-helpers] Please use @CLASS.NAME('') decorator for class ${target?.name}`)
+      // Helpers.log('check for ' + target.name)
+      // setTimeout(() => {
+      //   // Helpers.log('check for ' + target.name + ' === ' + config.className)/
+      //   // TODO this may work, but not yet in singleton/morphi
+      //   if (!config.className) {
+      //     if (target?.name && target.name !== 'Object') {
+      //       ConfigHelpers.log(`[typescript-class-helpers] Please use @CLASS.NAME`
+      //         + `('${(target?.name && !!target.name) ? target.name : '...'}') decorator for class ${target?.name}`)
+      //     }
+      //   }
+      // })
+
     }
     return target.name;
   }
