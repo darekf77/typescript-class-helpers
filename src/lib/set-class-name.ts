@@ -33,6 +33,7 @@ export function setClassName(target: Function, className: string, options?: Mode
   if (target) {
     const config = _.first(CLASSNAME.getClassConfig(target));
     config.className = className;
+    config.uniqueKey = uniqueKey;
     config.classNameInBrowser = classNameInBrowser;
     // console.log(`Setting class Name to "${target.name}"`)
   }
