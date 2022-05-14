@@ -2,11 +2,12 @@ import { _ } from 'tnp-core';
 import { Models } from './models';
 import { SYMBOL } from './symbols';
 import { TchHelpers } from './index';
-import { Helpers as ConfigHelpers } from 'tnp-core';
+import { Helpers } from 'tnp-core';
 import { getStorage } from './storage';
 import { setClassName } from './set-class-name';
 import { registerd } from './registerd-db';
 import { ERROR_MSG_CLASS_WITHOUT_DECORATOR } from './errors-messages';
+
 
 function getClasses(): Models.ClassMeta[] {
   const s = getStorage();
@@ -59,14 +60,19 @@ export namespace CLASSNAME {
   }
 
   export function getClassName(target: Function, production = false) {
+    if (_.isNil(target)) {
+      // console.log(target);
+      // Helpers.warn(`[typescript-class-helpers][getClassName] target is nil`)
+      return void 0;
+    }
     if (_.isString(target)) {
-      console.trace(target);
-      console.warn(`[typescript-class-helpers][getClassName] target is string: '${target}', produciton: ${production}`)
+      console.log(target);
+      Helpers.warn(`[typescript-class-helpers][getClassName] target is string: '${target}', produciton: ${production}`)
       return target;
     }
     if (!_.isFunction(target)) {
-      console.trace(target);
-      console.error(`[typescript-class-helpers][getClassName] target is not a class`)
+      console.log(target);
+      Helpers.warn(`[typescript-class-helpers][getClassName] target is not a class`)
       return void 0;
     }
 
@@ -75,7 +81,7 @@ export namespace CLASSNAME {
 
     const classNameInBrowser = config?.classNameInBrowser;
 
-    if (ConfigHelpers.isBrowser && _.isString(classNameInBrowser)) {
+    if (Helpers.isBrowser && _.isString(classNameInBrowser)) {
       return classNameInBrowser;
     }
 
