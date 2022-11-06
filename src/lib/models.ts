@@ -28,7 +28,7 @@ export namespace Models {
     descriptor: PropertyDescriptor;
     type: ConfigModels.HttpMethod;
     realtimeUpdate: boolean;
-    //#region @backend
+    //#region @websql
     requestHandler: any;
     //#endregion
     parameters: { [paramName: string]: ParamConfig } = {};

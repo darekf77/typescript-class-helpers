@@ -1,5 +1,6 @@
 {
   "resources": [],
+
   "overrided": {
     "includeAsDev": [],
     "includeOnly": [
@@ -10,28 +11,36 @@
     "dependencies": {},
     "linkedFolders": []
   },
+
   "linkedProjects": [],
+  linkedRepos: [],
+
   "libReleaseOptions": {
     "nodts": false,
     "obscure": false,
     "ugly": false
   },
+
   "type": "isomorphic-lib",
   "version": "v3",
-   additionalNpmNames: ["firedev-class-helpers"],
+  additionalNpmNames: ["firedev-class-helpers"],
   "license": "MIT",
   "private": false,
+
   "scripts": {
     "test": "mocha --require ts-node/register src/**/*.spec.ts",
     "test:watch": "mocha --compilers ts-node/register src/**/*.spec.ts --watch"
   },
+
   "description": "Usefull helper to have in your typescript project",
   "author": "Dariusz Filipiak",
   "homepage": "https://github.com/darekf77/typescript-class-helpers#readme",
+
   "keywords": [
     "ng2-rest",
     "docs",
     "documentation"
   ],
-  "workerPlugins": {}
+
+  "workerPlugins": {},
 }
