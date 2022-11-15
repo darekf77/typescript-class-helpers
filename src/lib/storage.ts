@@ -11,7 +11,7 @@ function defaultValues() {
 export function getStorage<T = any>(property?: string): T {
 
   //#region @backend
-  if (Helpers.isBrowser && !Helpers.simulateBrowser) {
+  if (Helpers.isBrowser) {
     console.trace(`[typescript-class-helpers][getStorage] You bundle contains backend files`)
   }
   //#endregion
