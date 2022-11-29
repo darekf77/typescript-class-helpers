@@ -13,6 +13,7 @@
   },
 
   "linkedProjects": [],
+  smartContainerBuildTarget: '',
   linkedRepos: [],
 
   "libReleaseOptions": {
@@ -21,6 +22,7 @@
     "ugly": false
   },
 
+  smartContainerTarget: '',
   "type": "isomorphic-lib",
   "version": "v3",
   additionalNpmNames: ["firedev-class-helpers"],
