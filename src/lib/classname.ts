@@ -54,7 +54,7 @@ export namespace CLASSNAME {
   export function CLASSNAME(className: string,
     options?: Models.CLASSNAMEOptions) {
     return function (target: Function) {
-      console.log(`CLASSNAME Inited ${className}`)
+      // console.log(`CLASSNAME Inited ${className}`)
       return setClassName(target, className, options);
     } as any;
   }
