@@ -1,16 +1,20 @@
-# TYPESCRIPT CLASS HELPERS
+# firedev-class-helpers (typescript-class-helpers)
 
-Library contains all kinds of helpers for OOP in typescript.
-
+- Part of [firedev.io](https://github.com/darekf77/
+- Helpers for OOP (Object Oriented Programming) in TypeScript.
+- Purpose:
+  + take advantage of classes in TypeScript/JavaScript in most glegant way
+  + prevent unusable class names during JS minification
 
 ## Installation:
-
-    npm i typescript-class-helpers
+```
+npm i typescript-class-helpers
+```
 
 ## Class manipulations
 
 ```ts
-import { CLASS } from 'typescript-class-helpers'l
+import { CLASS } from 'typescript-class-helpers';
 
 @CLASS.NAME('Example')
 class Example {
