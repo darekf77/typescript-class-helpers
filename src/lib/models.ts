@@ -24,10 +24,13 @@ export namespace Models {
 
   export class MethodConfig {
     methodName: string;
+    /**
+     * path is global in express app
+     */
+    global?: boolean;
     path: string;
     descriptor: PropertyDescriptor;
     type: ConfigModels.HttpMethod;
-    realtimeUpdate: boolean;
     //#region @websql
     requestHandler: any;
     //#endregion
