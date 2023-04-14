@@ -26,7 +26,7 @@
   },
   "license": "MIT",
   "private": false,
-  "lastBuildTagHash": "124223b183d7011c2406d859d64ef99dd9b2c877",
+  "lastBuildTagHash": "e2d04f6294736208d4b1a4f86470862de8de99e6",
   "devDependencies": {
     "@angular-devkit/build-angular": "~13.3.9",
     "@angular-devkit/core": "~13.3.9",
@@ -253,7 +253,7 @@
     "tslib": "~2.3.0",
     "typeorm": "~0.3.10",
     "typescript": "~4.6.2",
-    "typescript-class-helpers": "~13.1.12",
+    "typescript-class-helpers": "~13.1.13",
     "typescript-formatter": "~7.2.2",
     "underscore": "1.9.1",
     "uuid": "8.3.2",
