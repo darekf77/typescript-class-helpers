@@ -7,7 +7,9 @@ import { getStorage } from './storage';
 import { setClassName } from './set-class-name';
 import { registerd } from './registerd-db';
 import { ERROR_MSG_CLASS_WITHOUT_DECORATOR } from './errors-messages';
-
+//#region @backend
+import * as FormData from 'form-data';
+//#endregion
 
 function getClasses(): Models.ClassMeta[] {
   const s = getStorage();
@@ -171,6 +173,10 @@ export namespace CLASSNAME {
     }
     if (className === 'Date') {
       res = Date;
+    }
+
+    if (className === 'FormData') {
+      res = FormData;
     }
 
     let c = getClasses().find(c => c.className === className);

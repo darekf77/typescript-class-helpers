@@ -28,6 +28,14 @@ export namespace Models {
      * path is global in express app
      */
     global?: boolean;
+    /**
+     * override default content type
+     */
+    contentType?: any;
+    /**
+     * override default axiso response type
+     */
+    responseType?: any;
     path: string;
     descriptor: PropertyDescriptor;
     type: ConfigModels.HttpMethod;
