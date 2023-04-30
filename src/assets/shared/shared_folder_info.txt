@@ -1,0 +1,7 @@
+THIS FILE IS GENERATED. THIS FILE IS GENERATED. THIS FILE IS GENERATED.
+
+Assets from this folder can be used in npm package "typescript-class-helpers@13.2.5"
+created from this project.
+
+THIS FILE IS GENERATED.THIS FILE IS GENERATED. THIS FILE IS GENERATED.
+          
