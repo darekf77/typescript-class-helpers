@@ -18,8 +18,19 @@ export function describeFromClassStringify(target: Function, parent = false): st
       result = result.concat(describeFromClassStringify(proto.constructor, parent));
     }
   }
-  result = result.concat(target.toString().match(FRegEx) || []);
-  return result.map(prop => prop.replace('this.', ''))
+  const classString = target.toString();
+  const matches = classString.match(FRegEx) || []
+  // console.log({
+  //   classString,
+
+  // });
+  result = result.concat(matches);
+  return result.map(prop => prop
+    .replace('this.', '')
+    .replace('.', '')
+    .replace(')', '')
+    .replace('(', '')
+  )
 
 }
 
