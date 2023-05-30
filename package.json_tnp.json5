@@ -3,13 +3,16 @@
 
   "overrided": {
     "includeAsDev": [],
+
     "includeOnly": [
       "ng2-logger",
       "enum-values"
     ],
+
     "ignoreDepsPattern": [],
     "dependencies": {},
-    "linkedFolders": []
+    "linkedFolders": [],
+    'npmFixes': [],
   },
 
   "linkedProjects": [],
