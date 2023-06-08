@@ -28,7 +28,7 @@
 
   smartContainerTarget: '',
   "type": "isomorphic-lib",
-  "version": 'v16',
+  "version": 'v4',
   additionalNpmNames: ["firedev-class-helpers"],
   "license": "MIT",
   "private": false,
