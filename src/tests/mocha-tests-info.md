@@ -8,7 +8,7 @@ Put your backend **mocha** tests (with .spec extension) in this folder.
 firedev mocha
 firedev mocha:watch
 firedev mocha:debug # and start "attach" VSCode debugger
-firedev mocha:debug:watch # and start "attach" VSCode debugger
+firedev mocha:watch:debug # and start "attach" VSCode debugger
 ```
 
 # Example
