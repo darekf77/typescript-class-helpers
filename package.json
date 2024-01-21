@@ -45,7 +45,7 @@
   },
   "name": "typescript-class-helpers",
   "description": "Usefull helper to have in your typescript project",
-  "version": "16.5.7",
+  "version": "16.5.8",
   "scripts": {
     "test": "mocha --require ts-node/register src/**/*.spec.ts",
     "test:watch": "mocha --compilers ts-node/register src/**/*.spec.ts --watch"
@@ -66,7 +66,7 @@
   "homepage": "https://github.com/darekf77/typescript-class-helpers#readme",
   "dependencies": {
     "enum-values": "1.2.1",
-    "ng2-logger": "~16.5.8"
+    "ng2-logger": "~16.5.9"
   },
   "license": "MIT",
   "private": false,
@@ -323,8 +323,8 @@
     "task.js": "0.1.5",
     "threads": "1.7.0",
     "tnp-cli": "~16.5.6",
-    "tnp-config": "~16.5.7",
-    "tnp-core": "~16.5.12",
+    "tnp-config": "~16.5.8",
+    "tnp-core": "~16.5.13",
     "tnp-db": "~16.5.6",
     "tnp-helpers": "~16.5.7",
     "tnp-models": "~16.5.6",
