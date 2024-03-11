@@ -50,6 +50,13 @@ export class TchHelpers {
 
 }
 
+const notAllowed = [
+  'length', 'name',
+  'arguments', 'caller',
+  'constructor', 'apply',
+  'bind', 'call',
+  'toString'
+]
 
 export const CLASS = {
   NAME: CLASSNAME.CLASSNAME,
@@ -97,6 +104,24 @@ export const CLASS = {
   getConfigs: TchHelpers.getConfigs,
   getConfig: (target: Function) => {
     return _.first(TchHelpers.getConfigs(target));
+  },
+  getMethodsNames(classOrClassInstance: any): string[] {
+    if (_.isNil(classOrClassInstance)) {
+      return [];
+    }
+    const isFun = _.isFunction(classOrClassInstance)
+    const objectToCheck = isFun ? (classOrClassInstance as Function)?.prototype : classOrClassInstance;
+    // const proto = isFun ? Object.keys(objectToCheck) : Object.getPrototypeOf(objectToCheck);
+
+    const properties = ((isFun ? Object.keys(objectToCheck) : Object.getOwnPropertyNames(Object.getPrototypeOf(objectToCheck))) || [])
+      .filter(f => !notAllowed.includes(f));
+    // (CLASS.getName(classOrClassInstance) === '$CI') && console.log({
+    //   isFun,
+    //   prototypeToCheck: objectToCheck,
+    //   proto,
+    //   properties,
+    // })
+    return properties.filter((methodName) => typeof objectToCheck[methodName] === 'function');
   },
   getFromObject: TchHelpers.getFromObject,
   getName: TchHelpers.getName,
