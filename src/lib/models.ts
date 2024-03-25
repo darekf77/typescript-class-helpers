@@ -1,4 +1,4 @@
-import { ConfigModels } from 'tnp-config';
+import { CoreModels } from 'tnp-core/src';
 
 export namespace Models {
 
@@ -16,7 +16,7 @@ export namespace Models {
 
   export class ParamConfig {
     paramName: string;
-    paramType: ConfigModels.ParamType;
+    paramType: CoreModels.ParamType;
     index: number;
     defaultType: any;
     expireInSeconds?: number;
@@ -38,7 +38,7 @@ export namespace Models {
     responseType?: any;
     path: string;
     descriptor: PropertyDescriptor;
-    type: ConfigModels.HttpMethod;
+    type: CoreModels.HttpMethod;
     //#region @websql
     requestHandler: any;
     //#endregion
