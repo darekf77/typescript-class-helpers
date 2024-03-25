@@ -68,12 +68,12 @@ export namespace CLASSNAME {
       return void 0;
     }
     if (_.isString(target)) {
-      console.log(target);
+      // console.log(target);
       Helpers.warn(`[typescript-class-helpers][getClassName] target is string: '${target}', produciton: ${production}`)
       return target;
     }
     if (!_.isFunction(target)) {
-      console.log(target);
+      // console.log(target);
       Helpers.warn(`[typescript-class-helpers][getClassName] target is not a class`)
       return void 0;
     }
@@ -89,7 +89,7 @@ export namespace CLASSNAME {
 
     const className = config?.className;
 
-    if (className) {
+    if (typeof className === 'string') {
       return className;
     }
 
