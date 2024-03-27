@@ -20,7 +20,7 @@ export class TchHelpers {
     if (o.constructor) {
       return o.constructor;
     }
-    const p = Object.getPrototypeOf(o)
+    const p = Object.getPrototypeOf(o);
     return p && p.constructor;
   }
 
