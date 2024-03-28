@@ -20,7 +20,7 @@ export class TchHelpers {
     if (o.constructor) {
       return o.constructor;
     }
-    const p = Object.getPrototypeOf(o)
+    const p = Object.getPrototypeOf(o);
     return p && p.constructor;
   }
 
@@ -105,15 +105,17 @@ export const CLASS = {
   getConfig: (target: Function) => {
     return _.first(TchHelpers.getConfigs(target));
   },
-  getMethodsNames(classOrClassInstance: any): string[] {
-    if (_.isNil(classOrClassInstance)) {
-      return [];
+  getMethodsNames(classOrClassInstance: any, allMethodsNames = []): string[] {
+    if (!classOrClassInstance) {
+      return allMethodsNames;
     }
-    const isFun = _.isFunction(classOrClassInstance)
+
+    const isFun = _.isFunction(classOrClassInstance);
+    const classFun = (isFun ? classOrClassInstance : Object.getPrototypeOf(classOrClassInstance));
     const objectToCheck = isFun ? (classOrClassInstance as Function)?.prototype : classOrClassInstance;
     // const proto = isFun ? Object.keys(objectToCheck) : Object.getPrototypeOf(objectToCheck);
-
-    const properties = ((isFun ? Object.keys(objectToCheck) : Object.getOwnPropertyNames(Object.getPrototypeOf(objectToCheck))) || [])
+    const ooo = Object.getPrototypeOf(objectToCheck || {});
+    const properties = ((isFun ? Object.keys(objectToCheck || {}) : (!!ooo ? Object.getOwnPropertyNames(ooo) : [])) || [])
       .filter(f => !notAllowed.includes(f));
     // (CLASS.getName(classOrClassInstance) === '$CI') && console.log({
     //   isFun,
@@ -121,7 +123,11 @@ export const CLASS = {
     //   proto,
     //   properties,
     // })
-    return properties.filter((methodName) => typeof objectToCheck[methodName] === 'function');
+    properties.filter((methodName) => typeof objectToCheck[methodName] === 'function').forEach(p => allMethodsNames.push(p));
+    if (!classFun || !classFun.constructor || classFun?.constructor?.name === 'Object') {
+      return allMethodsNames;
+    }
+    return CLASS.getMethodsNames(Object.getPrototypeOf(classFun), allMethodsNames);
   },
   getFromObject: TchHelpers.getFromObject,
   getName: TchHelpers.getName,
