@@ -93,6 +93,7 @@ export namespace CLASSNAME {
       return className;
     }
 
+
     if (production) {
       console.log('class without @CLASS.NAME deocrator', target as any)
       throw new Error(ERROR_MSG_CLASS_WITHOUT_DECORATOR);
@@ -110,6 +111,12 @@ export namespace CLASSNAME {
       // })
 
     }
+
+    // special thing when cloning classes
+    if (target.name?.startsWith('class_')) {
+      return '';
+    }
+
     return target.name;
   }
 
