@@ -2,7 +2,9 @@ import { CoreModels } from 'tnp-core/src';
 
 export namespace Models {
 
-
+  /**
+   * @deprecated
+   */
   export type CLASSNAMEOptions = {
     uniqueKey?: string,
     /**
@@ -14,6 +16,9 @@ export namespace Models {
     classNameInBrowser?: string,
   }
 
+  /**
+   * @deprecated
+   */
   export class ParamConfig {
     paramName: string;
     paramType: CoreModels.ParamType;
@@ -22,6 +27,9 @@ export namespace Models {
     expireInSeconds?: number;
   }
 
+  /**
+   * @deprecated
+   */
   export class MethodConfig {
     methodName: string;
     /**
@@ -45,6 +53,9 @@ export namespace Models {
     parameters: { [paramName: string]: ParamConfig } = {};
   }
 
+  /**
+   * @deprecated
+   */
   export interface ClassMeta {
     uniqueKey?: string;
     className?: string;
@@ -53,6 +64,9 @@ export namespace Models {
     target?: Function;
   }
 
+  /**
+   * @deprecated
+   */
   export class ClassConfig {
     browserTransformFn?: (entity: any) => any;
     // @ts-ignore

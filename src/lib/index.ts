@@ -62,6 +62,9 @@ export const CLASS = {
   NAME: CLASSNAME.CLASSNAME,
   setName: setClassName,
   getBy: TchHelpers.getBy,
+  /**
+   * @deprecated
+   */
   getSingleton<T = any>(target: Function) {
     if (typeof target !== 'function') {
       console.error(`[typescript-class-helpers][setSingletonObj] Type of target is not a function`)
@@ -72,6 +75,9 @@ export const CLASS = {
 
     return config.singleton as T;
   },
+  /**
+   * @deprecated
+   */
   setSingletonObj(target: Function, singletonObject: any) {
     // console.log('SET SINGLETON', singletonObject)
     if (typeof target !== 'function') {
@@ -101,10 +107,17 @@ export const CLASS = {
 
     config.singleton = singletonObject;
   },
+  /**
+   * @deprecated
+   */
   getConfigs: TchHelpers.getConfigs,
+  /**
+   * @deprecated
+   */
   getConfig: (target: Function) => {
     return _.first(TchHelpers.getConfigs(target));
   },
+
   getMethodsNames(classOrClassInstance: any, allMethodsNames = []): string[] {
     if (!classOrClassInstance) {
       return allMethodsNames;
@@ -133,6 +146,9 @@ export const CLASS = {
   getName: TchHelpers.getName,
   getNameFromObject: TchHelpers.getNameFromObject,
   describeProperites: TchHelpers.describeProperites,
+  /**
+   * @deprecated
+   */
   OBJECT: (obj: any) => {
     return {
       get indexValue() {
