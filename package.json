@@ -49,7 +49,7 @@
   },
   "name": "typescript-class-helpers",
   "description": "Usefull helper to have in your typescript project",
-  "version": "16.5.29",
+  "version": "16.100.1",
   "scripts": {
     "test": "mocha --require ts-node/register src/**/*.spec.ts",
     "test:watch": "mocha --compilers ts-node/register src/**/*.spec.ts --watch"
@@ -70,11 +70,11 @@
   "homepage": "https://github.com/darekf77/typescript-class-helpers#readme",
   "dependencies": {
     "enum-values": "1.2.1",
-    "ng2-logger": "~16.5.30"
+    "ng2-logger": "~16.100.1"
   },
   "license": "MIT",
   "private": false,
-  "lastBuildTagHash": "1f4edabdd78eb5b7147661b2b9d526cad636ede1",
+  "lastBuildTagHash": "c9135b6e04ecf1d8e21abf50f8f5a3b2a741f0b6",
   "devDependencies": {
     "@angular-devkit/build-optimizer": "~0.3.1",
     "@angular-devkit/schematics": "~0.0.42",
@@ -281,8 +281,8 @@
     "sw-toolbox": "3.6.0",
     "systeminformation": "3.45.7",
     "tnp-cli": "~16.5.19",
-    "tnp-config": "~16.5.39",
-    "tnp-core": "~16.6.36",
+    "tnp-config": "~16.100.1",
+    "tnp-core": "~16.100.2",
     "tnp-db": "~16.5.20",
     "tnp-helpers": "~16.5.30",
     "tnp-models": "~16.5.28",
@@ -293,7 +293,7 @@
     "tslib": "~2.2.0",
     "tslint": "5.9.1",
     "typescript": "~4.1.5",
-    "typescript-class-helpers": "~16.5.29",
+    "typescript-class-helpers": "~16.100.1",
     "uglifyjs-webpack-plugin": "1.1.2",
     "underscore": "1.9.1",
     "url-loader": "0.6.2",
