@@ -50,13 +50,44 @@ export class TchHelpers {
 
 }
 
-const notAllowed = [
+const notAllowedAsMethodName = [
   'length', 'name',
   'arguments', 'caller',
   'constructor', 'apply',
   'bind', 'call',
-  'toString'
-]
+  'toString',
+  '__defineGetter__',
+  '__defineSetter__', 'hasOwnProperty',
+  '__lookupGetter__', '__lookupSetter__',
+  'isPrototypeOf', 'propertyIsEnumerable',
+  'valueOf', '__proto__', 'toLocaleString',
+];
+
+const getMethodsNames = (classOrClassInstance: any, allMethodsNames = []): string[] => {
+  if (!classOrClassInstance) {
+    return allMethodsNames;
+  }
+
+  const isClassFunction = _.isFunction(classOrClassInstance);
+  const classFun = (isClassFunction ? classOrClassInstance : Object.getPrototypeOf(classOrClassInstance));
+  const objectToCheck = isClassFunction ? (classOrClassInstance as Function)?.prototype : classOrClassInstance;
+  const prototypeObj = Object.getPrototypeOf(objectToCheck || {});
+
+  const properties = _.uniq([
+    ...Object.getOwnPropertyNames(objectToCheck || {}),
+    ...Object.getOwnPropertyNames(prototypeObj || {}),
+    ...Object.keys(objectToCheck || {}),
+    ...Object.keys(prototypeObj || {}),
+  ])
+    .filter(f => !!f && !notAllowedAsMethodName.includes(f));
+
+  properties.filter((methodName) => typeof objectToCheck[methodName] === 'function').forEach(p => allMethodsNames.push(p));
+
+  if (!classFun || !classFun.constructor || classFun?.constructor?.name === 'Object') {
+    return allMethodsNames;
+  }
+  return getMethodsNames(Object.getPrototypeOf(classFun), allMethodsNames);
+};
 
 export const CLASS = {
   NAME: CLASSNAME.CLASSNAME,
@@ -118,29 +149,9 @@ export const CLASS = {
     return _.first(TchHelpers.getConfigs(target));
   },
 
-  getMethodsNames(classOrClassInstance: any, allMethodsNames = []): string[] {
-    if (!classOrClassInstance) {
-      return allMethodsNames;
-    }
 
-    const isFun = _.isFunction(classOrClassInstance);
-    const classFun = (isFun ? classOrClassInstance : Object.getPrototypeOf(classOrClassInstance));
-    const objectToCheck = isFun ? (classOrClassInstance as Function)?.prototype : classOrClassInstance;
-    // const proto = isFun ? Object.keys(objectToCheck) : Object.getPrototypeOf(objectToCheck);
-    const ooo = Object.getPrototypeOf(objectToCheck || {});
-    const properties = ((isFun ? Object.keys(objectToCheck || {}) : (!!ooo ? Object.getOwnPropertyNames(ooo) : [])) || [])
-      .filter(f => !notAllowed.includes(f));
-    // (CLASS.getName(classOrClassInstance) === '$CI') && console.log({
-    //   isFun,
-    //   prototypeToCheck: objectToCheck,
-    //   proto,
-    //   properties,
-    // })
-    properties.filter((methodName) => typeof objectToCheck[methodName] === 'function').forEach(p => allMethodsNames.push(p));
-    if (!classFun || !classFun.constructor || classFun?.constructor?.name === 'Object') {
-      return allMethodsNames;
-    }
-    return CLASS.getMethodsNames(Object.getPrototypeOf(classFun), allMethodsNames);
+  getMethodsNames(classOrClassInstance: any): string[] {
+    return getMethodsNames(classOrClassInstance);
   },
   getFromObject: TchHelpers.getFromObject,
   getName: TchHelpers.getName,
