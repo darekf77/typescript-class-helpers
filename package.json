@@ -48,7 +48,7 @@
   },
   "name": "typescript-class-helpers",
   "description": "Usefull helper to have in your typescript project",
-  "version": "16.444.0",
+  "version": "16.444.1",
   "scripts": {
     "test": "mocha --require ts-node/register src/**/*.spec.ts",
     "test:watch": "mocha --compilers ts-node/register src/**/*.spec.ts --watch"
@@ -69,11 +69,11 @@
   "homepage": "https://github.com/darekf77/typescript-class-helpers#readme",
   "dependencies": {
     "enum-values": "1.2.1",
-    "ng2-logger": "16.100.10"
+    "ng2-logger": "16.444.1"
   },
   "license": "MIT",
   "private": false,
-  "lastBuildTagHash": "ce2016f34c9215d60d36f189ac385c60b5d0a1dc",
+  "lastBuildTagHash": "3c368bdab1f8537cad9b5a5c4984c91845ab5449",
   "devDependencies": {
     "@angular-builders/custom-webpack": "~16.0.2-beta.2",
     "@angular-devkit/build-angular": "~16.0.5",
@@ -341,8 +341,8 @@
     "task.js": "0.1.5",
     "threads": "1.7.0",
     "tnp-cli": "16.100.5",
-    "tnp-config": "16.100.10",
-    "tnp-core": "16.100.23",
+    "tnp-config": "16.444.1",
+    "tnp-core": "16.444.1",
     "tnp-db": "16.100.9",
     "tnp-helpers": "16.100.32",
     "tnp-models": "16.100.10",
@@ -354,7 +354,7 @@
     "tslint": "5.9.1",
     "turndown": "7.1.2",
     "typescript": "~5.0.2",
-    "typescript-class-helpers": "~16.100.10",
+    "typescript-class-helpers": "~16.444.1",
     "typescript-formatter": "~7.2.2",
     "underscore": "1.9.1",
     "uuid": "8.3.2",
