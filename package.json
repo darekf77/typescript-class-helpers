@@ -48,7 +48,7 @@
   },
   "name": "typescript-class-helpers",
   "description": "Usefull helper to have in your typescript project",
-  "version": "16.444.3",
+  "version": "16.444.4",
   "scripts": {
     "test": "mocha --require ts-node/register src/**/*.spec.ts",
     "test:watch": "mocha --compilers ts-node/register src/**/*.spec.ts --watch"
@@ -69,11 +69,11 @@
   "homepage": "https://github.com/darekf77/typescript-class-helpers#readme",
   "dependencies": {
     "enum-values": "1.2.1",
-    "ng2-logger": "16.444.2"
+    "ng2-logger": "16.444.4"
   },
   "license": "MIT",
   "private": false,
-  "lastBuildTagHash": "e9cfa874a49b42f2f2b3605988363831040c8871",
+  "lastBuildTagHash": "261ddc6374c46f263b536f6859ed806972950b40",
   "devDependencies": {
     "@angular-builders/custom-webpack": "~16.0.2-beta.2",
     "@angular-devkit/build-angular": "~16.0.5",
@@ -342,8 +342,8 @@
     "task.js": "0.1.5",
     "threads": "1.7.0",
     "tnp-cli": "16.444.1",
-    "tnp-config": "16.444.2",
-    "tnp-core": "16.444.3",
+    "tnp-config": "16.444.4",
+    "tnp-core": "16.444.5",
     "tnp-db": "16.444.1",
     "tnp-helpers": "16.444.3",
     "tnp-models": "16.444.2",
@@ -357,7 +357,7 @@
     "typedoc": "0.25.13",
     "typedoc-plugin-markdown": "4.0.3",
     "typescript": "~5.0.2",
-    "typescript-class-helpers": "~16.444.2",
+    "typescript-class-helpers": "~16.444.4",
     "typescript-formatter": "~7.2.2",
     "underscore": "1.9.1",
     "uuid": "8.3.2",
