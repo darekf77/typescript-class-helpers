@@ -1,8 +1,8 @@
-import { _ } from 'tnp-core';
+import { _ } from 'tnp-core/src';
 import { Models } from './models';
 import { SYMBOL } from './symbols';
 import { TchHelpers } from './index';
-import { Helpers } from 'tnp-core';
+import { Helpers } from 'tnp-core/src';
 import { getStorage } from './storage';
 import { setClassName } from './set-class-name';
 import { registerd } from './registerd-db';
@@ -16,18 +16,22 @@ function getClasses(): Models.ClassMeta[] {
   return s[SYMBOL.CLASSES] as any;
 }
 export namespace CLASSNAME {
-
-  export function getClassConfig(target: Function, configs: Models.ClassConfig[] = [], callerTarget?: Function): Models.ClassConfig[] {
+  export function getClassConfig(
+    target: Function,
+    configs: Models.ClassConfig[] = [],
+    callerTarget?: Function,
+  ): Models.ClassConfig[] {
     if (!_.isFunction(target)) {
-      throw `[typescript-class-helper][getClassConfig] Cannot get class config from: ${target}`
+      throw `[typescript-class-helper][getClassConfig] Cannot get class config from: ${target}`;
     }
 
     let config: Models.ClassConfig;
     const parentClass = Object.getPrototypeOf(target);
-    const isValidParent = (_.isFunction(parentClass) && parentClass.name !== '');
+    const isValidParent = _.isFunction(parentClass) && parentClass.name !== '';
 
     if (registerd.classes.includes(target)) {
-      config = registerd.configs[registerd.classes.findIndex(c => c === target)];
+      config =
+        registerd.configs[registerd.classes.findIndex(c => c === target)];
     } else {
       config = new Models.ClassConfig();
       config.classReference = target;
@@ -36,7 +40,8 @@ export namespace CLASSNAME {
 
     registerd.configs[registerd.classes.findIndex(c => c === target)] = config;
     if (callerTarget) {
-      const callerTargetConfig = registerd.configs[registerd.classes.findIndex(c => c === callerTarget)];
+      const callerTargetConfig =
+        registerd.configs[registerd.classes.findIndex(c => c === callerTarget)];
       if (!config.vChildren.includes(callerTargetConfig)) {
         config.vChildren.push(callerTargetConfig);
       }
@@ -45,7 +50,9 @@ export namespace CLASSNAME {
 
     configs.push(config);
 
-    return isValidParent ? getClassConfig(parentClass, configs, target) : configs;
+    return isValidParent
+      ? getClassConfig(parentClass, configs, target)
+      : configs;
   }
 
   /**
@@ -53,8 +60,10 @@ export namespace CLASSNAME {
    * Decorator requred for production mode
    * @param name Name of class
    */
-  export function CLASSNAME(className: string,
-    options?: Models.CLASSNAMEOptions) {
+  export function CLASSNAME(
+    className: string,
+    options?: Models.CLASSNAMEOptions,
+  ) {
     return function (target: Function) {
       // console.log(`CLASSNAME Inited ${className}`)
       return setClassName(target, className, options);
@@ -69,13 +78,21 @@ export namespace CLASSNAME {
     }
     if (_.isString(target)) {
       // console.log(target);
-      Helpers.warn(`[typescript-class-helpers][getClassName] target is string: '${target}', produciton: ${production}`)
+      Helpers.warn(
+        `[typescript-class-helpers][getClassName] target is string: '${target}', produciton: ${production}`,
+      );
       return target;
     }
     if (!_.isFunction(target)) {
       // console.log(target);
-      Helpers.warn(`[typescript-class-helpers][getClassName] target is not a class`)
+      Helpers.warn(
+        `[typescript-class-helpers][getClassName] target is not a class`,
+      );
       return void 0;
+    }
+
+    if (target[SYMBOL.ClassNameStaticProperty]) {
+      return target[SYMBOL.ClassNameStaticProperty];
     }
 
     const configs = getClassConfig(target);
@@ -93,9 +110,8 @@ export namespace CLASSNAME {
       return className;
     }
 
-
     if (production) {
-      console.log('class without @CLASS.NAME deocrator', target as any)
+      console.log('class without @CLASS.NAME deocrator', target as any);
       throw new Error(ERROR_MSG_CLASS_WITHOUT_DECORATOR);
     } else {
       // Helpers.log('check for ' + target.name)
@@ -109,7 +125,6 @@ export namespace CLASSNAME {
       //     }
       //   }
       // })
-
     }
 
     // special thing when cloning classes
@@ -171,11 +186,12 @@ export namespace CLASSNAME {
     propertyWithArray: ['MyClassName']
   }
 
-        `
+        `;
       }
-      className = className[0]
+      className = className[0];
     }
-    if (typeof className === 'function') { // TODO QUICK_FIX
+    if (typeof className === 'function') {
+      // TODO QUICK_FIX
       res = className;
     }
     if (className === 'Date') {
@@ -195,5 +211,4 @@ export namespace CLASSNAME {
     // @ts-ignore
     return res;
   }
-
 }

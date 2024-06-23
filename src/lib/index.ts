@@ -1,4 +1,4 @@
-import { _ } from 'tnp-core';
+import { _ } from 'tnp-core/src';
 import { CLASSNAME } from './classname';
 import { describeFromClassStringify, describeByDefaultModelsAndMapping } from './describe-class';
 import { Models } from './models';

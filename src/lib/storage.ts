@@ -1,6 +1,6 @@
-import { Helpers } from 'tnp-core';
+import { Helpers } from 'tnp-core/src';
 import { SYMBOL } from './symbols';
-import { _ } from 'tnp-core';
+import { _ } from 'tnp-core/src';
 
 function defaultValues() {
   return _.cloneDeep({

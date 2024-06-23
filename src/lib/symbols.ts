@@ -3,4 +3,5 @@ export const SYMBOL = {
   DEFAULT_MODEL: Symbol(),
   STORAGE: 'classesstorage',
   CLASSES: 'classes',
+  ClassNameStaticProperty : '$$className$$'
 }
