@@ -3,16 +3,11 @@
 
   "overrided": {
     "includeAsDev": [],
-
-    "includeOnly": [
-      "ng2-logger",
-      "enum-values"
-    ],
-
+    "includeOnly": ["ng2-logger", "enum-values"],
     "ignoreDepsPattern": [],
     "dependencies": {},
     "linkedFolders": [],
-    "npmFixes": [],
+    "npmFixes": []
   },
 
   "smartContainerBuildTarget": "",
@@ -26,12 +21,12 @@
     "cliBuildNoDts": false,
     "cliBuildObscure": false,
     "cliBuildIncludeNodeModules": false,
-    "cliBuildUglify": false,
+    "cliBuildUglify": false
   },
 
   "smartContainerTarget": "",
   "type": "isomorphic-lib",
-  "version": "v16",
+  "version": "v18",
   "additionalNpmNames": ["firedev-class-helpers"],
   "license": "MIT",
   "private": false,
@@ -44,12 +39,6 @@
   "description": "Usefull helper to have in your typescript project",
   "author": "Dariusz Filipiak",
   "homepage": "https://github.com/darekf77/typescript-class-helpers#readme",
-
-  "keywords": [
-    "ng2-rest",
-    "docs",
-    "documentation"
-  ],
-
-  "workerPlugins": {},
+  "keywords": ["ng2-rest", "docs", "documentation"],
+  "workerPlugins": {}
 }
