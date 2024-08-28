@@ -27,7 +27,7 @@
   "smartContainerTarget": "",
   "type": "isomorphic-lib",
   "version": "v18",
-  "additionalNpmNames": ["firedev-class-helpers"],
+  "additionalNpmNames": ["taon-class-helpers"],
   "license": "MIT",
   "private": false,
 
