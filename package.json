@@ -48,7 +48,7 @@
   },
   "name": "typescript-class-helpers",
   "description": "Usefull helper to have in your typescript project",
-  "version": "18.0.9",
+  "version": "18.0.10",
   "scripts": {
     "test": "mocha --require ts-node/register src/**/*.spec.ts",
     "test:watch": "mocha --compilers ts-node/register src/**/*.spec.ts --watch"
@@ -69,11 +69,11 @@
   "homepage": "https://github.com/darekf77/typescript-class-helpers#readme",
   "dependencies": {
     "enum-values": "1.2.1",
-    "ng2-logger": "~18.0.8"
+    "ng2-logger": "~18.0.11"
   },
   "license": "MIT",
   "private": false,
-  "lastBuildTagHash": "a42ad65b7ebf538c2548d06e7b2d4978c5c92020",
+  "lastBuildTagHash": "3c4977a14f7541b9e75307cf9c6dae0f09cda243",
   "devDependencies": {
     "@angular-builders/custom-webpack": "~18.0.0",
     "@angular-devkit/build-angular": "~18.1.4",
@@ -274,6 +274,7 @@
     "ng-talkback": "~18.0.5",
     "ng2-pdfjs-viewer": "18.0.0",
     "ng2-rest": "~18.0.6",
+    "ng2-rest-swagger-generator": "18.0.5",
     "ngx-ace-wrapper": "17.0.0",
     "ngx-editor": "17.5.4",
     "ngx-highlightjs": "12.0.0",
@@ -341,7 +342,7 @@
     "task.js": "0.1.5",
     "threads": "1.7.0",
     "tnp": "~18.0.6",
-    "tnp-config": "~18.0.8",
+    "tnp-config": "~18.0.11",
     "tnp-core": "~18.0.30",
     "tnp-helpers": "~18.0.6",
     "tnp-models": "~18.0.7",
@@ -356,7 +357,7 @@
     "typedoc": "0.26.5",
     "typedoc-plugin-markdown": "4.2.3",
     "typescript": "~5.5.4",
-    "typescript-class-helpers": "~18.0.7",
+    "typescript-class-helpers": "~18.0.10",
     "typescript-formatter": "~7.2.2",
     "underscore": "1.13.7",
     "uuid": "10.0.0",
