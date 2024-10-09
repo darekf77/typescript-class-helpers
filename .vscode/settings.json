@@ -69,7 +69,7 @@
     "**/recent.json": true,
     "**/angular.json": true,
     "**/webpack*": true,
-    "**/docs/**/*.*": true,
+    "**/docs/**/*": true,
     "**/run-*": true,
     "**/run.*": true,
     "**/package-lock.json": true,
