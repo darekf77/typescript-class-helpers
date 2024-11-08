@@ -1,0 +1,14 @@
+{
+  "site_name": "typescript-class-helpers",
+  "externalDocs": {
+    "mdfiles": [],
+    "projects": []
+  },
+  "omitFilesPatters": [],
+  "priorityOrder": [],
+  "mapTitlesNames": {
+    "README.md": "Introduction"
+  },
+  "customCssPath": "custom.css",
+  "customJsPath": "custom.js"
+}
