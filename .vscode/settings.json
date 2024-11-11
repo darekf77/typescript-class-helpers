@@ -1,18 +1,14 @@
 {
   "typescript.check.workspaceVersion": false,
-
   "workbench.colorCustomizations": {
     "activityBar.background": "#1a755ecb"
   },
-
   "editor.rulers": [
     80,
     120
   ],
-
   "html.format.wrapAttributes": "force-aligned",
   "workbench.colorTheme": "Default Light+",
-
   "files.exclude": {
     "**/*____ORIGINAL____.ts": true,
     "_changelog": true,
@@ -77,10 +73,8 @@
     "**/karma.conf.js": true,
     "**/docs-config.schema.json": true
   },
-
   "search.exclude": {
     "docs": true,
-    "projects": true,
     "bin": true,
     "local_release": true,
     "node_modules": true,
@@ -92,9 +86,7 @@
     ".firedev": true,
     ".taon": true,
     ".tnp": true,
-    ".": true,
     "**/docs": true,
-    "**/projects": true,
     "**/bin": true,
     "**/local_release": true,
     "**/node_modules": true,
@@ -106,49 +98,40 @@
     "**/.firedev": true,
     "**/.taon": true,
     "**/.tnp": true,
-    "**/.": true
+    "projects": true
   },
-
   "[typescriptreact]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": false
   },
-
   "[json]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": false
   },
-
   "[jsonc]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": false
   },
-
   "[json5]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": false
   },
-
   "[scss]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": false
   },
-
   "[html]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": false
   },
-
   "[javascript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": false
   },
-
   "[typescript]": {
     "editor.defaultFormatter": "esbenp.prettier-vscode",
     "editor.formatOnSave": false
   },
-
   "eslint.migration.2_x": "off",
   "eslint.enable": true,
   "prettier.enable": true,
@@ -161,13 +144,15 @@
   "prettier.prettierPath": "./node_modules/prettier",
   "window.title": "npm/taon-dev/typescript-class-helpers (taon-class-helpers) [ ${activeEditorShort} ]",
   "search.useIgnoreFiles": false,
-
   "search.include": [
     "**/src/**"
   ],
-
-  "json.schemas": [{
-    "fileMatch": ["/docs-config.jsonc"],
-    "url": "./docs-config.schema.json"
-  }]
+  "json.schemas": [
+    {
+      "fileMatch": [
+        "/docs-config.jsonc"
+      ],
+      "url": "./docs-config.schema.json"
+    }
+  ]
 }
