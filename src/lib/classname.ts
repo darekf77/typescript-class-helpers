@@ -78,14 +78,14 @@ export namespace CLASSNAME {
     }
     if (_.isString(target)) {
       // console.log(target);
-      Helpers.warn(
+      Helpers.log(
         `[typescript-class-helpers][getClassName] target is string: '${target}', produciton: ${production}`,
       );
       return target;
     }
     if (!_.isFunction(target)) {
       // console.log(target);
-      Helpers.warn(
+      Helpers.log(
         `[typescript-class-helpers][getClassName] target is not a class`,
       );
       return void 0;
