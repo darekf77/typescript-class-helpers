@@ -44,7 +44,8 @@
       "docs",
       "documentation"
     ],
-    "workerPlugins": {}
+    "workerPlugins": {},
+    "packageJsonOverride": {}
   },
   "name": "typescript-class-helpers",
   "description": "Usefull helper to have in your typescript project",
