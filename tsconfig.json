@@ -4,15 +4,7 @@
     "module": "NodeNext",
     "moduleResolution": "NodeNext",
     "strictNullChecks": false,
-    "rootDir": "./src",
-    "paths": {
-      "typescript-class-helpers": [
-        "./src/lib"
-      ],
-      "typescript-class-helpers/*": [
-        "./src/lib/*"
-      ]
-    }
+    "rootDir": "./src"
   },
   "include": [
     "src/**/*"
