@@ -1,6 +1,6 @@
 {
   "name": "typescript-class-helpers",
-  "version": "18.0.26",
+  "version": "18.0.27",
   "scripts": {
     "test": "mocha --require ts-node/register src/**/*.spec.ts",
     "test:watch": "mocha --compilers ts-node/register src/**/*.spec.ts --watch"
