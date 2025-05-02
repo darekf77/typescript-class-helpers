@@ -4,10 +4,16 @@
     "strictNullChecks": false,
     "rootDir": "./src",
     "paths": {
-      "typescript-class-helpers": [
+      "@lib": [
         "./src/lib"
       ],
-      "typescript-class-helpers/*": [
+      "@lib/*": [
+        "./src/lib/*"
+      ],
+      "typescript-class-helpers/src": [
+        "./src/lib"
+      ],
+      "typescript-class-helpers/src/*": [
         "./src/lib/*"
       ]
     }
