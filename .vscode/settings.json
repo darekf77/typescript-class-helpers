@@ -1,7 +1,9 @@
 {
   "typescript.check.workspaceVersion": false,
   "workbench.colorCustomizations": {
-    "activityBar.background": "#1a755ecb"
+    "activityBar.background": "#1a755ecb",
+    "statusBar.background": "#91cf5e",
+    "statusBar.debuggingBackground": "#15d8ff"
   },
   "editor.rulers": [
     80,
