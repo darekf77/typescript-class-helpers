@@ -3,6 +3,7 @@
   "version": "v19",
   "dependenciesNamesForNpmLib": ["ng2-logger", "enum-values"],
   "additionalNpmNames": ["taon-class-helpers"],
+  "appId": "com.domain.example.typescript-class-helpers",
 
   "autoReleaseConfigAllowedItems": [{
     "artifactName": "npm-lib-and-cli-tool"
