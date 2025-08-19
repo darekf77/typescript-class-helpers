@@ -83,6 +83,15 @@ export namespace CLASSNAME {
       );
       return target;
     }
+
+    if (target === Date) {
+      return 'Date';
+    }
+
+    if ((target as any) === FormData) {
+      return 'FormData';
+    }
+
     if (!_.isFunction(target)) {
       // console.log(target);
       Helpers.log(
