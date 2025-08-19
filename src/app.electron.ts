@@ -5,7 +5,7 @@ path,
 //#region @backend
 fse
 //#endregion
-} from 'tnp-core';
+} from 'tnp-core/src';
 //#region @backend
 import { app, BrowserWindow, screen } from 'electron';
 
@@ -36,7 +36,6 @@ if (serve) {
   const debug = require('electron-debug');
   debug();
 
-  require('electron-reloader')(module);
   win.loadURL('http://localhost:' + (websql ? CLIENT_DEV_WEBSQL_APP_PORT : CLIENT_DEV_NORMAL_APP_PORT));
 } else {
   // Path when running electron executable
@@ -94,4 +93,4 @@ try {
 }
 
 export default startElectron;
-//#endregion  
+//#endregion
