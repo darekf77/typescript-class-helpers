@@ -48,7 +48,8 @@ export class TypescriptClassHelpersComponent {
   readonly users$: Observable<User[]> = this.userApiService.getAll();
   readonly hello$ = this.userApiService.userController
     .helloWorld()
-    .request().observable.pipe(map(r => r.body.text));
+    .request()
+    .observable.pipe(map(r => r.body.text));
 }
 //#endregion
 //#endregion
@@ -63,7 +64,8 @@ export class UserApiService extends Taon.Base.AngularService {
   getAll(): Observable<User[]> {
     return this.userController
       .getAll()
-      .request().observable.pipe(map(r => r.body.json));
+      .request()
+      .observable.pipe(map(r => r.body.json));
   }
 }
 //#endregion
@@ -178,11 +180,14 @@ var MainContext = Taon.createContext(() => ({
 }));
 //#endregion
 
-async function start(startParams?:Taon.StartParams): Promise<void> {
+async function start(startParams?: Taon.StartParams): Promise<void> {
   await MainContext.initialize();
 
-   //#region @backend
-   if (startParams.onlyMigrationRun || startParams.onlyMigrationRevertToTimestamp) {
+  //#region @backend
+  if (
+    startParams.onlyMigrationRun ||
+    startParams.onlyMigrationRevertToTimestamp
+  ) {
     process.exit(0);
   }
   //#endregion
