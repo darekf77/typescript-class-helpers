@@ -1,6 +1,6 @@
 {
   "type": "isomorphic-lib",
-  "version": "v19",
+  "version": "v21",
   "dependenciesNamesForNpmLib": ["ng2-logger", "enum-values"],
   "additionalNpmNames": ["taon-class-helpers"],
   "appId": "com.domain.example.typescript-class-helpers",
