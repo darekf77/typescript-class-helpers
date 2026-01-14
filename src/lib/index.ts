@@ -222,4 +222,3 @@ export const CLASS = {
   }
 }
 
-export * from 'enum-values';

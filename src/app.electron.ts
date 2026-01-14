@@ -1,3 +1,4 @@
+// @ts-nocheck
 //#region @notForNpm
 import { app, BrowserWindow, screen } from 'electron';
 import { path, fse } from 'tnp-core/src';
