@@ -1,4 +1,4 @@
-import { _ } from 'tnp-core/src';
+import { _, UtilsOs } from 'tnp-core/src';
 import { Models } from './models';
 import { SYMBOL } from './symbols';
 import { TchHelpers } from './index';
@@ -109,7 +109,7 @@ export namespace CLASSNAME {
 
     const classNameInBrowser = config?.classNameInBrowser;
 
-    if (Helpers.isBrowser && _.isString(classNameInBrowser)) {
+    if (UtilsOs.isBrowser && _.isString(classNameInBrowser)) {
       return classNameInBrowser;
     }
 

@@ -1,4 +1,4 @@
-import { Helpers } from 'tnp-core/src';
+import { Helpers, UtilsOs } from 'tnp-core/src';
 import { SYMBOL } from './symbols';
 import { _ } from 'tnp-core/src';
 
@@ -11,7 +11,7 @@ function defaultValues() {
 export function getStorage<T = any>(property?: string): T {
 
   //#region @backend
-  if (Helpers.isBrowser) {
+  if (UtilsOs.isBrowser) {
     console.trace(`[typescript-class-helpers][getStorage] You bundle contains backend files`)
   }
   //#endregion
