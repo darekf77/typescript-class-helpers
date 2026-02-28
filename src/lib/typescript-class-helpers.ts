@@ -42,7 +42,7 @@ export function getClassName(target: Function): string | undefined {
     return void 0;
   }
 
-  if (target[CoreModels.ClassNameStaticProperty]) {
+  if (!_.isNil(target[CoreModels.ClassNameStaticProperty])) {
     return target[CoreModels.ClassNameStaticProperty];
   }
 
