@@ -188,7 +188,7 @@
   "tslint.alwaysShowRuleFailuresAsWarnings": false,
   "prettier.endOfLine": "auto",
   "prettier.prettierPath": "./node_modules/prettier",
-  "window.title": "npm/taon-dev/typescript-class-helpers  [ ${activeEditorShort} ]",
+  "window.title": "taon-dev/typescript-class-helpers () [ ${activeEditorShort}]",
   "search.useIgnoreFiles": false,
 
   "search.include": [
