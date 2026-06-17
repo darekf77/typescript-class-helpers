@@ -1,6 +1,6 @@
 {
   "name": "typescript-class-helpers",
-  "version": "21.0.44",
+  "version": "21.0.45",
   "scripts": {
     "test": "mocha --require ts-node/register src/**/*.spec.ts",
     "test:watch": "mocha --compilers ts-node/register src/**/*.spec.ts --watch",
@@ -471,5 +471,9 @@
     "type": "git",
     "url": "git+https://github.com/darekf77/typescript-class-helpers.git"
   },
-  "bin": {}
+  "bin": {
+    "typescript-class-helpers": "bin/typescript-class-helpers",
+    "typescript-class-helpers-debug": "bin/typescript-class-helpers-debug",
+    "typescript-class-helpers-debug-brk": "bin/typescript-class-helpers-debug-brk"
+  }
 }
