@@ -15,7 +15,7 @@ npm i typescript-class-helpers
 ## Class manipulations (in nodejs)
 
 ```ts
-import { CLASS } from 'typescript-class-helpers';
+import { CLASS } from 'typescript-class-helpers/src';
 
 @CLASS.NAME('Example')
 class Example {

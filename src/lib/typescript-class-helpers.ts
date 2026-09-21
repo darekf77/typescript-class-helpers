@@ -51,21 +51,19 @@ export function getClassName(target: Function): string | undefined {
     return '';
   }
 
-  return;
+  // Do not rely on Function.name because it may be mangled/minified.
+  return undefined;
 }
 
-export function getFromObject(o: Object) {
-  if (_.isUndefined(o) || _.isNull(o)) {
-    return;
+export function getClassFnFromObject(obj: object): Function | undefined {
+  if (_.isNil(obj)) {
+    return undefined;
   }
-  if (o.constructor) {
-    return o.constructor;
-  }
-  const p = Object.getPrototypeOf(o);
-  return p && p.constructor;
+
+  return Object.getPrototypeOf(obj)?.constructor;
 }
 
-const notAllowedAsMethodName = [
+const notAllowedAsMethodNames = new Set([
   'length',
   'name',
   'arguments',
@@ -85,7 +83,7 @@ const notAllowedAsMethodName = [
   'valueOf',
   '__proto__',
   'toLocaleString',
-];
+]);
 
 export namespace CLASS {
   /**
@@ -116,17 +114,18 @@ export namespace CLASS {
     target[CoreModels.ClassNameStaticProperty] = className;
     classes.set(className, target);
   }
-  export function getBy(className: string | Function): Function {
+  export function getBy(className: string | Function): Function | undefined {
     let res;
+
     if (Array.isArray(className)) {
       if (className.length !== 1) {
-        throw `Mapping error... please use proper class names:
+        throw new Error(`Mapping error... please use proper class names:
   {
     propertyObject: 'MyClassName',
     propertyWithArray: ['MyClassName']
   }
 
-        `;
+        `);
       }
       className = className[0];
     }
@@ -146,15 +145,8 @@ export namespace CLASS {
     return classFromMap ? classFromMap : res;
   }
 
-  export function getFromObject(o: Object): Function | undefined{
-    if (_.isUndefined(o) || _.isNull(o)) {
-      return;
-    }
-    if (o.constructor) {
-      return o.constructor;
-    }
-    const p = Object.getPrototypeOf(o);
-    return p && p.constructor;
+  export function getFromObject(o: Object): Function | undefined {
+    return getClassFnFromObject(o);
   }
 
   export function getName(target: Function): string | undefined {
@@ -187,7 +179,9 @@ export namespace CLASS {
       ...Object.getOwnPropertyNames(prototypeObj || {}),
       ...Object.keys(objectToCheck || {}),
       ...Object.keys(prototypeObj || {}),
-    ]).filter(f => !!f && !notAllowedAsMethodName.includes(f));
+    ]).filter(f => !!f && !notAllowedAsMethodNames.has(f));
+
+    // .filter(name => !!name && !notAllowedAsMethodNames.has(name));
 
     properties
       .filter(methodName => typeof objectToCheck[methodName] === 'function')
